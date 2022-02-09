@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-use App\Models\MyClass;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\MyClass;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Subject extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name', 'short_name', 'school_id', 'my_class_id',
+        'name', 'short_name', 'school_id', 'my_class_id'
     ];
 
     /**
@@ -32,6 +32,6 @@ class Subject extends Model
      */
     public function teachers()
     {
-        return $this->belongsToMany(User::class, 'subject_user', );
-    }
+        return $this->belongsToMany(User::class, 'subject_user',);
+    }    
 }

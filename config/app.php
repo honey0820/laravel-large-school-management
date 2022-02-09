@@ -18,7 +18,8 @@ return [
     /**
      * Application logo
      */
-    'logo' => env('LOGO_PATH'),
+
+    "logo" => env('LOGO_PATH'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment

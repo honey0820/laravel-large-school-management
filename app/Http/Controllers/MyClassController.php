@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\MyClassStoreRequest;
 use App\Models\MyClass;
-use App\Services\MyClass\MyClassService;
 use Illuminate\Http\Request;
+use App\Services\MyClass\MyClassService;
+use App\Http\Requests\MyClassStoreRequest;
 
 class MyClassController extends Controller
 {
     //create public properties
     public $myClass;
+
 
     //construct method
     public function __construct(MyClassService $myClass)
@@ -18,7 +19,7 @@ class MyClassController extends Controller
         $this->myClass = $myClass;
         $this->authorizeResource(MyClass::class, 'class');
     }
-
+      
     /**
      * Display a listing of the resource.
      *
@@ -49,7 +50,7 @@ class MyClassController extends Controller
     {
         $data = $request->except('_token');
         $this->myClass->createClass($data);
-
+         
         return redirect()->back();
     }
 
@@ -62,7 +63,7 @@ class MyClassController extends Controller
     public function show(MyClass $class)
     {
         $data['class'] = $class;
-
+        
         return view('pages.class.show', $data);
     }
 
@@ -86,7 +87,7 @@ class MyClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(MyClassStoreRequest $request, MyClass $class)
+    public function update(MyClassStoreRequest $request,MyClass $class)
     {
         $data = $request->except('_token', '_method');
         $this->myClass->updateClass($class, $data);

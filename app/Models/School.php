@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use App\Models\ClassGroup;
-use App\Models\MyClass;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\MyClass;
+use App\Models\ClassGroup;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class School extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name', 'address', 'code', 'initials',
+        'name', 'address', 'code', 'initials'
     ];
 
     public function classGroups()

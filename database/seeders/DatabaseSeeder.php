@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use Database\Seeders\MyClassSeeder;
-use Database\Seeders\RunInProductionSeeder;
-use Database\Seeders\SectionSeeder;
 use Illuminate\Database\Seeder;
+use Database\Seeders\MyClassSeeder;
+use Database\Seeders\SectionSeeder;
+use Database\Seeders\RunInProductionSeeder;
 
 class DatabaseSeeder extends Seeder
 {

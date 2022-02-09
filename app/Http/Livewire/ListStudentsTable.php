@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Services\Student\StudentService;
 use Livewire\Component;
+use App\Services\Student\StudentService;
 
 class ListStudentsTable extends Component
 {

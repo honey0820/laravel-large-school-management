@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ClassGroupStoreRequest extends FormRequest
 {
+ 
     /**
      * Get the validation rules that apply to the request.
      *
