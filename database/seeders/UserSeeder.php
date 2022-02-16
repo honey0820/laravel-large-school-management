@@ -25,10 +25,6 @@ class UserSeeder extends Seeder
             'school_id' => 1,
             'address' => 'super admin street',
             'birthday' => '22/04/04',
-            'nationality' => 'nigeria',
-            'state' => 'lagos',
-            'city' => 'lagos',
-            'blood_group' => 'B+',
         ]);
 
         $superAdmin->assignRole('super-admin');
@@ -40,10 +36,6 @@ class UserSeeder extends Seeder
             'school_id' => 1,
             'address' => 'admin street',
             'birthday' => '22/04/04',
-            'nationality' => 'nigeria',
-            'state' => 'lagos',
-            'city' => 'lagos',
-            'blood_group' => 'B+',
         ]);
 
         $admin->assignRole('admin');
@@ -55,10 +47,6 @@ class UserSeeder extends Seeder
             'school_id'=> 1,
             'address' => 'teacher street',
             'birthday' => '22/04/04',
-            'nationality' => 'nigeria',
-            'state' => 'lagos',
-            'city' => 'lagos',
-            'blood_group' => 'B+',
         ]);
 
         $teacher->assignRole('teacher');
@@ -70,20 +58,9 @@ class UserSeeder extends Seeder
             'school_id'=> 1,
             'address' => 'student street',
             'birthday' => '22/04/04',
-            'nationality' => 'nigeria',
-            'state' => 'lagos',
-            'city' => 'lagos',
-            'blood_group' => 'B+',
         ]);
 
         $student->assignRole('student');
-
-        $student->studentRecord()->create([
-            'my_class_id' => 1,
-            'section_id' => 1,
-            'admission_number' => 1,
-            'admission_date' => '22/04/04',
-        ]);
 
         $parent = User::create([
             'name' => 'John Doe',
@@ -92,10 +69,6 @@ class UserSeeder extends Seeder
             'school_id'=> 1,
             'address' => 'parent street',
             'birthday' => '22/04/04',
-            'nationality' => 'nigeria',
-            'state' => 'lagos',
-            'city' => 'lagos',
-            'blood_group' => 'B+',
         ]);
 
         $parent->assignRole('parent');
@@ -107,10 +80,6 @@ class UserSeeder extends Seeder
             'school_id'=> 1,
             'address' => 'accountant street',
             'birthday' => '22/04/04',
-            'nationality' => 'nigeria',
-            'state' => 'lagos',
-            'city' => 'lagos',
-            'blood_group' => 'B+',
         ]);
 
         $accountant->assignRole('accountant');
@@ -122,10 +91,6 @@ class UserSeeder extends Seeder
             'school_id'=> 1,
             'address' => 'librarian street',
             'birthday' => '22/04/04',
-            'nationality' => 'nigeria',
-            'state' => 'lagos',
-            'city' => 'lagos',
-            'blood_group' => 'B+',
         ]);
 
         $librarian->assignRole('librarian');

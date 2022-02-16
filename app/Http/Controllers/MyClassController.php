@@ -60,11 +60,9 @@ class MyClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(MyClass $class)
+    public function show($id)
     {
-        $data['class'] = $class;
-        
-        return view('pages.class.show', $data);
+        //
     }
 
     /**
@@ -101,10 +99,8 @@ class MyClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MyClass $class)
+    public function destroy($id)
     {
-        $this->myClass->deleteClass($class);
-
-        return back();
+        //
     }
 }

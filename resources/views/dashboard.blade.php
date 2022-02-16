@@ -20,8 +20,6 @@
     
     <div class="my-3">@livewire('school-set')</div>
     @livewire('dashboard-data-cards')
-    
-    @livewire('academic-year-set')
 
     @livewire('display-status')
 @stop

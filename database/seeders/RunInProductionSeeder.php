@@ -17,7 +17,10 @@ class RunInProductionSeeder extends Seeder
     public function run()
     {
         $this->call([
-          
+            SchoolSeeder::class,
+            RoleSeeder::class,
+            PermissionSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }

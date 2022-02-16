@@ -57,9 +57,7 @@ class SectionPolicy
      */
     public function update(User $user, Section $section)
     {
-        if ($user->can('update class') && $user->school_id == $section->myClass->classGroup->school_id) {
-            return true;
-       }
+        //
     }
 
     /**

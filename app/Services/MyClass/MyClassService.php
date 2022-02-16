@@ -10,7 +10,8 @@ class MyClassService{
     //create public properties
     public $school;
 
-    //construct method
+
+      //construct method
     public function __construct(SchoolService $school)
     {
         $this->school = $school;
@@ -91,18 +92,15 @@ class MyClassService{
         return $classGroup;
     }
 
+    public function deleteClass()
+    {
+        return MyClass::delete();
+    }
 
     public function deleteClassGroup(ClassGroup $classGroup)
     {
         $classGroup->delete();
 
         return session()->flash('success',  __('Class group deleted successfully'));
-    }
-
-    public function deleteClass(MyClass $class)
-    {
-        $class->delete();
-
-        return session()->flash('success',  __('Class deleted successfully'));
     }
 }
