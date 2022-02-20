@@ -36,17 +36,22 @@ class SectionService
 
     public function createSection($records)
     {
-        if (!$this->getSectionById($records['my_class_id'])) {
-           return  session()->flash('danger' ,__('Class does not exists'));; 
-        }
-
         $section = Section::firstOrCreate($records);
 
         if ($section->wasRecentlyCreated) {
             session()->flash('success' ,__('Section created successfully'));
         }else {
-            session()->flash('danger' ,__('Section already exists'));
+            session()->flash('danger' ,__('Section slready exists'));
         }
+
+        return $section;
+    }
+
+    public function updateSection(Section $section, $record)
+    {
+        $section->name = $record->name;
+        $section->save();
+        session()->flash('success' ,__('Section updated successfully'));
 
         return $section;
     }
