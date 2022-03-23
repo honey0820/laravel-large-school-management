@@ -57,13 +57,4 @@ class SemesterService
         $semester->save();
         return session()->flash('success',"Successfully updated semester");
     }
-
-    //delete semester
-
-    public function deleteSemester(Semester $semester)
-    {
-        $semester->delete();
-        
-        return session()->flash('success',"Successfully deleted semester");
-    }
 }

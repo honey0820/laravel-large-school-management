@@ -25,197 +25,170 @@ class PermissionSeeder extends Seeder
         */
 
         // Permissions for school
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'create school',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'read school',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'update school',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'delete school',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'manage school settings',
         ]);
 
         // Permissions for class group
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'create class group',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'read class group',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'update class group',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'delete class group',
         ]);
 
         // Permissions for class
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'create class',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'read class',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'update class',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'delete class',
         ]);
 
         // Permissions for sectionm
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'create section',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'read section',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'update section',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'delete section',
         ]);
 
         //Permission for students
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'create student',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'read student',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'update student',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'delete student',
         ]);
 
         //Permission for academic year
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'create academic year',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'read academic year',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'update academic year',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'delete academic year',
-        ]);
-        Permission::firstOrCreate([
-            'name' => 'set academic year',
         ]);
 
         //Permission for teacher
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'create teacher',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'read teacher',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'update teacher',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'delete teacher',
         ]);
 
         //Permission for subject
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'create subject',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'read subject',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'update subject',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'delete subject',
         ]);
 
         //Permission for student promotions
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'promote student'
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'read promotion'
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'reset promotion'
         ]);
 
         //permission for semesters
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'create semester'
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'read semester'
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'update semester'
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'delete semester'
-        ]);
-
-        Permission::firstOrCreate([
-            'name' => 'set semester'
-        ]);
-
-        //permission for syllabus
-        Permission::firstOrCreate([
-            'name' => 'create syllabus'
-        ]);
-        Permission::firstOrCreate([
-            'name' => 'read syllabus'
-        ]);
-        Permission::firstOrCreate([
-            'name' => 'update syllabus'
-        ]);
-        Permission::firstOrCreate([
-            'name' => 'delete syllabus'
         ]);
 
 
         //header permissions (for controlling the menu headers)
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'header-administrate',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'header-schools',
         ]);
-        Permission::firstOrCreate([
-            'name' => 'header-academics',
-        ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'menu-class',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'menu-section',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'menu-student',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'menu-teacher',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'menu-academic-year',
         ]);
-        Permission::firstOrCreate([
+        Permission::create([
             'name' => 'menu-subject',
-        ]);
-        Permission::firstOrCreate([
-            'name' => 'menu-syllabus',
         ]);
 
         /**
@@ -226,14 +199,12 @@ class PermissionSeeder extends Seeder
         $admin = Role::where('name', 'admin')->first();
         $admin->givePermissionTo([
             'header-administrate',
-            'header-academics',
             'menu-section',
             'menu-class',
             'menu-student',
             'menu-teacher',
             'menu-academic-year',
             'menu-subject',
-            'menu-syllabus',
             'manage school settings',
             'create section',
             'read section',
@@ -255,7 +226,6 @@ class PermissionSeeder extends Seeder
             'read academic year',
             'update academic year',
             'delete academic year',
-            'set academic year',
             'create teacher',
             'read teacher',
             'update teacher',
@@ -271,31 +241,12 @@ class PermissionSeeder extends Seeder
             'read semester',
             'update semester',
             'delete semester',
-            'set semester',
-            'create syllabus',
-            'read syllabus',
-            'update syllabus',
-            'delete syllabus'
         ]);
 
         //assign permissions to teacher
-        $teacher = Role::where('name', 'teacher')->first();
-        $teacher->givePermissionTo([
-            'header-academics',
-            'menu-syllabus',
-            'create syllabus',
-            'read syllabus',
-            'update syllabus',
-            'delete syllabus'
-        ]);
 
-        //assign permissions to student
-        $student = Role::where('name', 'student')->first();
-        $student->givePermissionTo([
-            'header-academics',
-            'menu-syllabus',
-            'read syllabus'
-        ]);
+         //assign permissions to student
+
         //assign permissions to parent
 
         //assign permissions to librarian

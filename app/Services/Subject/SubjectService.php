@@ -72,11 +72,8 @@ class SubjectService
 
     //delete subject
 
-    public function deleteSubject(Subject $subject)
+    public function deleteSubject($id)
     {
-        $subject->delete();
-
-        return session()->flash('success', 'Subject deleted successfully');
+        return Subject::where(['id' => $id])->delete();
     }
- 
 }

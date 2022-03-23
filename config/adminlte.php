@@ -468,13 +468,13 @@ return [
                 [
                     'type' => 'sidebar-menu-item',
                     'text' => 'View Syllabus',
-                    'route' => 'syllabi.index',
+                    'route' => 'classes.index',
                     'can'  => 'read syllabus',
                 ],
                 [
                     'type' => 'sidebar-menu-item',
                     'text' => 'Create Syllabus',
-                    'route' => 'syllabi.create',
+                    'route' => 'classes.create',
                     'can'  => 'create syllabus',
                 ],
             ],
