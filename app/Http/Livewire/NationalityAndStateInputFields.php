@@ -8,8 +8,11 @@ use Livewire\Component;
 class NationalityAndStateInputFields extends Component
 {
     public $nationalities;
+
     public $nationality;
+
     public $states;
+
     public $state;
 
     protected $rules = [
@@ -35,10 +38,6 @@ class NationalityAndStateInputFields extends Component
                 'name' => $this->nationality,
             ]
         ])->data->pluck('states')->first();
-        $this->state = $this->states[0]['name'];
-
-        $this->dispatchBrowserEvent('nationality-updated',['nationality' => $this->nationality]);
-        $this->dispatchBrowserEvent('state-updated',['state' => $this->state]);
     }
 
     public function loadInitialStates()
@@ -60,12 +59,6 @@ class NationalityAndStateInputFields extends Component
             ]
         ])->data->pluck('states')->first();
         }
-        
-    }
-
-    public function updatedState()
-    {
-        $this->dispatchBrowserEvent('state-updated',['state' => $this->state]);
     }
 
     public function render()

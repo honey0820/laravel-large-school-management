@@ -185,20 +185,6 @@ class PermissionSeeder extends Seeder
             'name' => 'delete syllabus'
         ]);
 
-        //permission for timetable
-        Permission::firstOrCreate([
-            'name' => 'create timetable'
-        ]);
-        Permission::firstOrCreate([
-            'name' => 'read timetable'
-        ]);
-        Permission::firstOrCreate([
-            'name' => 'update timetable'
-        ]);
-        Permission::firstOrCreate([
-            'name' => 'delete timetable'
-        ]);
-
 
         //header permissions (for controlling the menu headers)
         Permission::firstOrCreate([
@@ -231,9 +217,6 @@ class PermissionSeeder extends Seeder
         Permission::firstOrCreate([
             'name' => 'menu-syllabus',
         ]);
-        Permission::firstOrCreate([
-            'name' => 'menu-timetable',
-        ]);
 
         /**
          * assign permissions to roles
@@ -251,7 +234,6 @@ class PermissionSeeder extends Seeder
             'menu-academic-year',
             'menu-subject',
             'menu-syllabus',
-            'menu-timetable',
             'manage school settings',
             'create section',
             'read section',
@@ -293,11 +275,7 @@ class PermissionSeeder extends Seeder
             'create syllabus',
             'read syllabus',
             'update syllabus',
-            'delete syllabus',
-            'create timetable',
-            'read timetable',
-            'update timetable',
-            'delete timetable',
+            'delete syllabus'
         ]);
 
         //assign permissions to teacher
@@ -305,15 +283,10 @@ class PermissionSeeder extends Seeder
         $teacher->givePermissionTo([
             'header-academics',
             'menu-syllabus',
-            'menu-timetable',
             'create syllabus',
             'read syllabus',
             'update syllabus',
-            'delete syllabus',
-            'create timetable',
-            'read timetable',
-            'update timetable',
-            'delete timetable',
+            'delete syllabus'
         ]);
 
         //assign permissions to student
@@ -321,9 +294,7 @@ class PermissionSeeder extends Seeder
         $student->givePermissionTo([
             'header-academics',
             'menu-syllabus',
-            'menu-timetable',
-            'read syllabus',
-            'read timetable',
+            'read syllabus'
         ]);
         //assign permissions to parent
 

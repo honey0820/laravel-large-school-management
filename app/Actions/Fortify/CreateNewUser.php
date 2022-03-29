@@ -53,8 +53,6 @@ class CreateNewUser implements CreatesNewUsers
             'phone' => $input['phone'],
         ]);
 
-        $user->sendEmailVerificationNotification();
-        
         return $user;
     }
 }

@@ -11,7 +11,7 @@ class ListStudentsTable extends Component
 
     public function mount(StudentService $studentService)
     {
-        $this->students = $studentService->getAllStudents()->sortBy('name');
+        $this->students = $studentService->getAllStudents();
     }
 
     public function render()
