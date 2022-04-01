@@ -22,7 +22,7 @@ class TimetableStoreRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
-            'my_class_id' => 'required|integer|exists:my_classes,id',
+            'subject_id' => 'required|integer|exists:subjects,id',
         ];
     }
 }

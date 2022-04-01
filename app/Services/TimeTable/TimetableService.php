@@ -12,7 +12,7 @@ class TimetableService
     {
         return Timetable::where('semester_id', $semester_id)->get()->filter(function ($timetable) use ($class_id)
         {
-            return $timetable->myClass->id == $class_id;
+            return $timetable->subject->myClass->id == $class_id;
         });
     }
 
@@ -28,7 +28,7 @@ class TimetableService
             Timetable::create([
                 'name' => $data['name'],
                 'description' => $data['description'],
-                'my_class_id' => $data['my_class_id'],
+                'subject_id' => $data['subject_id'],
                 'semester_id' => $data['semester_id'],
             ]);
         });
@@ -43,6 +43,7 @@ class TimetableService
         DB::transaction(function() use ($data, $timetable) {
             $timetable->name = $data['name'];
             $timetable->description = $data['description'];
+            $timetable->subject_id = $data['subject_id'];
             $timetable->save();
         });
 
