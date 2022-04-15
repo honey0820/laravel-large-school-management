@@ -34,7 +34,7 @@
                 </tr>
                 <tr>
                     <th scope="row">Nationality:</th>
-                    <td>{{$user->nationality}} </td>
+                    <td>{{$user->email}} </td>
                 </tr>
                 <tr>
                     <th scope="row">State:</th>
@@ -45,7 +45,7 @@
                     <td>{{$user->city}} </td>
                 </tr>
                 <tr>
-                    <th scope="row">Address:</th>
+                    <th scope="row">Adress:</th>
                     <td>{{$user->address}} </td>
                 </tr>
                 <tr>

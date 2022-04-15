@@ -16,32 +16,12 @@ return [
 		'fr',
 		'ja',
 		'kr',
-		'nl',
 		'pl',
 		'pt',
 		'ro',
 		'ru',
 		'zh',
 	],
-	/*
-	|--------------------------------------------------------------------------
-	| Enabled modules.
-	| The cities module depends on the states module.
-	|--------------------------------------------------------------------------
-	*/
-	'modules' => [
-		'states' => true,
-		'cities' => true,
-		'timezones' => true,
-		'currencies' => true,
-		'languages' => true,
-	],
-	/*
-	|--------------------------------------------------------------------------
-	| Routes.
-	|--------------------------------------------------------------------------
-	*/
-	'routes' => true,
 	/*
 	|--------------------------------------------------------------------------
 	| Migrations.
@@ -69,7 +49,7 @@ return [
 					'required' => true,
 					'type' => 'string',
 				],
-				'subregion' => [
+				'sub_region' => [
 					'required' => true,
 					'type' => 'string',
 				],
@@ -95,7 +75,7 @@ return [
 			'table_name' => 'states',
 			'optional_fields' => [
 				'country_code' => [
-					'required' => true,
+					'required' => false,
 					'type' => 'string',
 					'length' => 3,
 				],
@@ -118,7 +98,7 @@ return [
 			'table_name' => 'cities',
 			'optional_fields' => [
 				'country_code' => [
-					'required' => true,
+					'required' => false,
 					'type' => 'string',
 					'length' => 3,
 				],
@@ -146,5 +126,18 @@ return [
 		'languages' => [
 			'table_name' => 'languages',
 		],
+	],
+	/*
+	|--------------------------------------------------------------------------
+	| Enabled seeders.
+	| The cities seeder depends on the states seeder.
+	|--------------------------------------------------------------------------
+	*/
+	'seeders' => [
+		'states' => true,
+		'cities' => true,
+		'timezones' => true,
+		'currencies' => true,
+		'languages' => true,
 	],
 ];
