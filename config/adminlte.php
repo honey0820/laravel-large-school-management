@@ -575,12 +575,6 @@ return [
                     'route' => 'exams.result-tabulation',
                     'can'   => 'read exam',
                 ],
-                [
-                    'type'  => 'sidebar-menu-item',
-                    'text'  => 'Result Checker',
-                    'route' => 'exams.result-checker',
-                    'can'   => 'check result',
-                ],
             ],
         ],
         [
