@@ -40,7 +40,7 @@ class TimetableController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param TimetableStoreRequest $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -65,7 +65,7 @@ class TimetableController extends Controller
     }
 
     /**
-     * Print timetable.
+     * Print timetsable.
      */
     public function print(Timetable $timetable)
     {
@@ -89,8 +89,8 @@ class TimetableController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param TimetableUpdateRequest $request
-     * @param \App\Models\Timetable  $timetable
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Timetable    $timetable
      *
      * @return \Illuminate\Http\Response
      */

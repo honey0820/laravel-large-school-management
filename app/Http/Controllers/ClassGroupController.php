@@ -41,7 +41,7 @@ class ClassGroupController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param ClassGroupStoreRequest $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -56,7 +56,7 @@ class ClassGroupController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param ClassGroup $classGroup
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -70,7 +70,7 @@ class ClassGroupController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param ClassGroup $classGroup
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -84,8 +84,8 @@ class ClassGroupController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param ClassGroupStoreRequest $request
-     * @param ClassGroup             $classGroup
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -100,7 +100,7 @@ class ClassGroupController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param ClassGroup $classGroup
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */

@@ -20,7 +20,7 @@ class GraduationController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // authorization is done in the controller
+    // atuhorization is done in the controller
     public function index()
     {
         if (!auth()->user()->can('view graduations')) {

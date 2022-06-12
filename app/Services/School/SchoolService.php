@@ -16,7 +16,7 @@ class SchoolService
     /**
      * User service constructor.
      *
-     * @param UserService $user
+     * @param App\Services\UserService $user
      */
     public function __construct(UserService $user)
     {
@@ -62,8 +62,7 @@ class SchoolService
     /**
      * Update school.
      *
-     * @param School $school
-     * @param $records
+     * @param array $record
      *
      * @return App\Models\School
      */
@@ -112,7 +111,7 @@ class SchoolService
     /**
      * Delete school.
      *
-     * @param School $school
+     * @param App\Models\School $school
      *
      * @return void
      */

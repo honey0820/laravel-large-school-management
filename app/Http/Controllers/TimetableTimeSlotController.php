@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\storeTimetableRecord;
+use App\Http\Requests\storeTimetableReord;
 use App\Http\Requests\StoreTimetableTimeSlotRequest;
 use App\Http\Requests\UpdateTimetableTimeSlotRequest;
 use App\Models\Timetable;
@@ -92,8 +92,7 @@ class TimetableTimeSlotController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Timetable         $timetable
-     * @param TimetableTimeSlot $timeSlot
+     * @param \App\Models\TimetableTimeSlot $timetableTimeSlot
      *
      * @return \Illuminate\Http\Response
      */
@@ -105,7 +104,7 @@ class TimetableTimeSlotController extends Controller
     }
 
     //timetable record
-    public function addTimetableRecord(Timetable $timetable, TimetableTimeSlot $timeSlot, storeTimetableRecord $request)
+    public function addTimetableRecord(Timetable $timetable, TimetableTimeSlot $timeSlot, storeTimetableReord $request)
     {
         $this->authorize('update', $timetable);
         $data = $request->except('_token');

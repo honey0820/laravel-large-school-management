@@ -57,9 +57,7 @@ class TeacherController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param User $teacher
-     *
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -73,9 +71,7 @@ class TeacherController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param User $teacher
-     *
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -90,9 +86,7 @@ class TeacherController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param User                     $teacher
-     *
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -107,9 +101,7 @@ class TeacherController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param User $teacher
-     *
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */

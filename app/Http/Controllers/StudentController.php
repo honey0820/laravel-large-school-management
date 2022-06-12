@@ -11,7 +11,7 @@ class StudentController extends Controller
 {
     public $student;
 
-    //construct method which assigns studentService to student variable
+    //construct method which assigns studentservice to student variable
     public function __construct(StudentService $student)
     {
         $this->student = $student;
@@ -44,9 +44,7 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param StudentStoreRequest $request
-     *
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -89,9 +87,7 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param User $student
-     *
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -108,9 +104,7 @@ class StudentController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param User                     $student
-     *
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -127,9 +121,7 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param User $student
-     *
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */

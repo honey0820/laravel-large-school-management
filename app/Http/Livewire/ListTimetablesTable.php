@@ -31,7 +31,7 @@ class ListTimetablesTable extends Component
         else {
             //get all classes
             $this->classes = $myClassService->getAllClasses();
-            //set initial record
+            //set intial record
             if (!$this->classes->isEmpty()) {
                 $this->timetables = $timetableService->getAllTimetablesInSemesterAndClass($semester, $this->classes[0]['id']);
             } else {
