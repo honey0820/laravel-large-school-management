@@ -31,23 +31,22 @@ class ResultChecker extends Component
     ];
 
     public function mount(SectionService $sectionService, MyClassService $myClassService)
-    {
+    {       
         $this->academicYears = auth()->user()->school->academicYears;
         $this->academicYear = $this->academicYears->first()->id;
         $this->updatedAcademicYear();
-        if (auth()->user()->hasRole('super admin') || auth()->user()->hasRole('admin') || auth()->user()->hasRole('teacher')) {
+        if (auth()->user()->hasRole('super-admin') || auth()->user()->hasRole('admin') || auth()->user()->hasRole('teacher')) {
             $this->classes = $myClassService->getAllClasses();
 
             if ($this->classes->isEmpty()) {
-                return;
+            return;
             }
             $this->class = $this->classes[0]->id;
             $this->updatedClass();
-        } elseif (auth()->user()->hasRole('student')) {
+        }elseif (auth()->user()->hasRole('student')) {
             $this->checkResult(auth()->user()->school->semester, auth()->user());
         }
     }
-
     //updated academic year
     public function updatedAcademicYear()
     {
@@ -104,7 +103,7 @@ class ResultChecker extends Component
         }
 
         // fetch all exams, subjects and exam records for user in semester
-        $this->exams = $semester->exams;
+        $this->exams = $semester->exams()->where('publish_result', true)->get();
         $this->subjects = $student->studentRecord->myClass->subjects;
         //fetch all students exam records in semester
         $this->examRecords = app("App\Services\Exam\ExamRecordService")->getAllUserExamRecordInSemester($semester, $student->id);
