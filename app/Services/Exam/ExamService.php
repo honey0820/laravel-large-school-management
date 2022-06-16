@@ -15,7 +15,7 @@ class ExamService
      */
     protected $examRecordService;
 
-    /**
+     /**
      * @var App\Services\Exam\ExamSlotService
      */
     protected $examSlotService;
@@ -27,10 +27,9 @@ class ExamService
     }
 
     /**
-     * Get all exams in a semester.
+     * Get all exams in a semester
      *
      * @param int $semester_id
-     *
      * @return void
      */
     public function getAllExamsInSemester(int $semester_id)
@@ -39,10 +38,9 @@ class ExamService
     }
 
     /**
-     * Get active exams in a semester.
+     * Get active exams in a semester
      *
      * @param int $semester_id
-     *
      * @return void
      */
     public function getActiveExamsInSemester(int $semester_id)
@@ -51,10 +49,9 @@ class ExamService
     }
 
     /**
-     * get an exam by it's id.
+     * get an exam by it's id
      *
      * @param int $id
-     *
      * @return App\Models\Exam
      */
     public function getExamById(int $id)
@@ -63,10 +60,9 @@ class ExamService
     }
 
     /**
-     * Create exam in semester.
+     * Create exam in semester
      *
      * @param array|object $records
-     *
      * @return void
      */
     public function createExam($records)
@@ -82,14 +78,15 @@ class ExamService
         });
         session()->flash('success', 'Exam created successfully');
 
+        return;
     }
 
     /**
      * Update an exam.
      *
-     * @param Exam         $exam
+     * @param Exam $exam
      * @param array|object $records
-     *
+     * 
      * @return void
      */
     public function updateExam(Exam $exam, $records)
@@ -102,14 +99,15 @@ class ExamService
         $exam->save();
         session()->flash('success', 'Exam updated successfully');
 
+        return;
     }
 
     /**
-     * set status of exam to active or inactive.
+     * set status of exam to active or inactive
      *
      * @param Exam $exam
-     * @param bool $status
-     *
+     * @param boolean $status
+     * 
      * @return void
      */
     public function setExamStatus(Exam $exam, bool $status)
@@ -118,6 +116,7 @@ class ExamService
         $exam->save();
         session()->flash('success', 'Exam status changed successfully');
 
+        return;
     }
 
     /**
@@ -140,7 +139,6 @@ class ExamService
      * Delete exam.
      *
      * @param Exam $exam
-     *
      * @return void
      */
     public function deleteExam(Exam $exam)
@@ -154,8 +152,7 @@ class ExamService
      * Calculate total marks attainale in each subjects for an exam.
      *
      * @param Exam $exam
-     *
-     * @return int
+     * @return integer
      */
     public function totalMarksAttainableInExamForSubject(Exam $exam)
     {
@@ -171,8 +168,7 @@ class ExamService
      * Calculate total marks attainale in each subjects accross all exams in a semester.
      *
      * @param Exam $exam
-     *
-     * @return int
+     * @return integer
      */
     public function totalMarksAttainableInSemesterForSubject(Semester $semester)
     {
@@ -189,11 +185,11 @@ class ExamService
     /**
      * Calculate total marks attainale accross all subjects in an exam.
      *
-     * @param Exam    $exam
-     * @param User    $user
+     * @param Exam $exam
+     * @param User $user
      * @param Subject $subject
-     *
-     * @return int
+     * 
+     * @return integer
      */
     public function calculateStudentTotalMarksInSubject(Exam $exam, User $user, Subject $subject)
     {
@@ -204,10 +200,9 @@ class ExamService
      * Calculate total marks gotten by student in semester across all exams in a subject.
      *
      * @param Semester $semester
-     * @param User     $user
-     * @param Subject  $subject
-     *
-     * @return int
+     * @param User $user
+     * @param Subject $subject
+     * @return integer
      */
     public function calculateStudentTotalMarkInSubjectForSemester(Semester $semester, User $user, Subject $subject)
     {

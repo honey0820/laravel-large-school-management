@@ -6,11 +6,12 @@ use App\Models\GradeSystem;
 
 class GradeSystemService
 {
+
     /**
-     * Get all grades in class group.
-     *
+     * Get all grades in class group
+     * 
      * @param int $classGroup_id
-     *
+     * 
      * @return App\Model\GradeSystem
      */
     public function getAllGradesInClassGroup(int $classGroup_id)
@@ -20,15 +21,25 @@ class GradeSystemService
         return $grades;
     }
 
-    //get grade from percent
 
-    public function getGrade($classGroup, $percentage)
+    /**
+     * Get grade in classgroup for a percent
+     *
+     * @param int $classGroup
+     * @param int $percentage
+     * @return void
+     */
+    public function getGrade(int $classGroup,int $percentage)
     {
         return $this->getAllGradesInClassGroup($classGroup)->where('grade_from', '<=', $percentage)->where('grade_till', '>=', $percentage)->first();
     }
 
-    //create grade system
-
+    /**
+     * Create grade in gradesystem
+     *
+     * @param array|object $records
+     * @return void
+     */
     public function createGradeSystem($records)
     {
         $gradesInDb = $this->getAllGradesInClassGroup($records['class_group_id']);
@@ -44,12 +55,19 @@ class GradeSystemService
             'name'           => $records['name'],
             'remark'         => $records['remark'],
         ]);
+        session()->flash('success', 'Grade system created successfully');
 
-        return session()->flash('success', 'Grade system created successfully');
+        return;
     }
 
-    // edit grade system
 
+    /**
+     * Update frade in gradesystem
+     *
+     * @param GradeSystem $grade
+     * @param array|object $records
+     * @return void
+     */
     public function updateGradeSystem(GradeSystem $grade, $records)
     {
         $gradesInDb = $this->getAllGradesInClassGroup($records['class_group_id'])->except($grade->id);
@@ -66,20 +84,30 @@ class GradeSystemService
             'remark'         => $records['remark'],
         ]);
         $grade->save();
+        session()->flash('success', 'Grade updated successfully');
 
-        return session()->flash('success', 'Grade updated successfully');
+        return;
     }
 
+    /**
+     * Delete Grade in grade system
+     *
+     * @param GradeSystem $grade
+     * @return void
+     */
     public function deleteGradeSystem(GradeSystem $grade)
     {
         $grade->delete();
+        session()->flash('success', 'successfully deleted grade');
 
-        return session()->flash('success', 'successfully deleted grade');
+        return;
     }
 
     /**
      * @param array $grade  with grade_from and grade_till
      * @param array $grades each with grade_from and grade_till (testing against)
+     * 
+     * @return boolean
      */
     public function gradeRangeExists($grade, $grades)
     {
