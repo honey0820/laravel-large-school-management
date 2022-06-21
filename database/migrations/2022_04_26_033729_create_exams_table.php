@@ -15,7 +15,6 @@ return new class() extends Migration {
             $table->date('start_date');
             $table->date('stop_date');
             $table->boolean('active')->default(false);
-            $table->boolean('publish_result')->default(false);
             $table->timestamps();
         });
     }

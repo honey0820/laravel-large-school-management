@@ -5,14 +5,14 @@
 
 @section('content_header')
     <h1 class=" font-weight-semibold">
-        {{ __('Syllabi') }}
+        {{ __('syllabi') }}
     </h1>
 
     @livewire('show-set-school')
     
     @livewire('breadcrumbs', ['paths' => [
         ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
-        ['href'=> route('syllabi.index'), 'text'=> 'Syllabi', 'active'],
+        ['href'=> route('syllabi.index'), 'text'=> 'syllabi', 'active'],
     ]])
 
 @stop

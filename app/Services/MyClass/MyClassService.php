@@ -8,11 +8,7 @@ use App\Services\School\SchoolService;
 
 class MyClassService
 {
-    /**
-     * School service variable.
-     *
-     * @var App\Services\SchoolService
-     */
+    //create public properties
     public $school;
 
     //construct method
@@ -21,69 +17,31 @@ class MyClassService
         $this->school = $school;
     }
 
-    /**
-     * Get all classes in school.
-     *
-     * @return Illuminate\Support\Collection
-     */
     public function getAllClasses()
     {
         return collect($this->school->getSchoolById(auth()->user()->school_id)->myClasses->load('classGroup', 'sections')->all());
     }
 
-    /**
-     * Get all ClassGroups in school.
-     *
-     * @return Illuminate\Eloquent\Collection
-     */
     public function getAllClassGroups()
     {
         return ClassGroup::where('school_id', auth()->user()->school_id)->get();
     }
 
-    /**
-     * Get all classes in school.
-     *
-     * @param int $id
-     *
-     * @return App\Models\MyClass
-     */
-    public function getClassById(int $id)
+    public function getClassById($id)
     {
         return MyClass::find($id);
     }
 
-    /**
-     * Get class by id or else return 404.
-     *
-     * @param int $id
-     *
-     * @return void
-     */
-    public function getClassByIdOrFail(int $id)
+    public function getClassByIdOrFail($id)
     {
         return $this->school->getSchoolById(auth()->user()->school_id)->myClasses()->findOrFail($id);
     }
 
-    /**
-     * Get class group by id.
-     *
-     * @param int $id
-     *
-     * @return void
-     */
-    public function getClassGroupById(int $id)
+    public function getClassGroupById($id)
     {
         return ClassGroup::where('school_id', auth()->user()->school_id)->find($id);
     }
 
-    /**
-     * Create new class.
-     *
-     * @param array|object $record
-     *
-     * @return App\Models\MyClass
-     */
     public function createClass($record)
     {
         if (!$this->getClassGroupById($record['class_group_id'])) {
@@ -101,13 +59,6 @@ class MyClassService
         return $myClass;
     }
 
-    /**
-     * Create new class group.
-     *
-     * @param array|object $record
-     *
-     * @return App\Models\ClassGroup
-     */
     public function createClassGroup($record)
     {
         $record['school_id'] = auth()->user()->school_id;
@@ -123,14 +74,6 @@ class MyClassService
         return $classGroup;
     }
 
-    /**
-     * Update class.
-     *
-     * @param App\Models\MyClass $myClass
-     * @param array|object       $records
-     *
-     * @return App\Models\MyClass
-     */
     public function updateClass($myClass, $records)
     {
         $myClass->update([
@@ -142,14 +85,6 @@ class MyClassService
         return $myClass;
     }
 
-    /**
-     * Update class group.
-     *
-     * @param App\Models\ClassGroup $classGroup
-     * @param array|object          $records
-     *
-     * @return App\Models\ClassGroup
-     */
     public function updateClassGroup(ClassGroup $classGroup, $records)
     {
         $classGroup->update(
@@ -162,37 +97,23 @@ class MyClassService
         return $classGroup;
     }
 
-    /**
-     * Delete class group.
-     *
-     * @param App\Models\ClassGroup $classGroup
-     *
-     * @return void
-     */
     public function deleteClassGroup(ClassGroup $classGroup)
     {
         if ($classGroup->classes->count()) {
             return session()->flash('danger', __('Remove all classes from this class group first'));
         }
         $classGroup->delete();
-        session()->flash('success', __('Class group deleted successfully'));
 
+        return session()->flash('success', __('Class group deleted successfully'));
     }
 
-    /**
-     * Delete class.
-     *
-     * @param App\Models\MyClass $class
-     *
-     * @return void
-     */
     public function deleteClass(MyClass $class)
     {
         if ($class->studentRecords->count()) {
             return session()->flash('danger', __('Remove all students from this class first'));
         }
         $class->delete();
-        session()->flash('success', __('Class deleted successfully'));
 
+        return session()->flash('success', __('Class deleted successfully'));
     }
 }

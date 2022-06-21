@@ -8,38 +8,22 @@ use Illuminate\Support\Facades\DB;
 
 class ExamSlotService
 {
-    /**
-     * Get all exam slots in exam.
-     *
-     * @param Exam $exam
-     *
-     * @return Illumiate\Database\Eloquent\Collection|static[]
-     */
+    //get all exam slots for exam
+
     public function getAllExamSlots(Exam $exam)
     {
         return $exam->examSlots;
     }
 
-    /**
-     * Get an exam slot by id.
-     *
-     * @param int $id
-     *
-     * @return App\Models\ExamSlot
-     */
+    //get examslot by id
+
     public function getExamSlotById($id)
     {
         return ExamSlot::find($id);
     }
 
-    /**
-     * Create exam slot.
-     *
-     * @param Exam  $exam
-     * @param array $data
-     *
-     * @return void
-     */
+    //create exam slot
+
     public function createExamSlot(Exam $exam, array $data)
     {
         DB::transaction(function () use ($data, $exam) {
@@ -52,18 +36,12 @@ class ExamSlotService
                 'total_marks' => $data['total_marks'],
             ]);
         });
-        session()->flash('success', 'Exam Slot Created Successfully');
 
+        return session()->flash('success', 'Exam Slot Created Successfully');
     }
 
-    /**
-     * Update exam slot.
-     *
-     * @param ExamSlot $examSlot
-     * @param array    $data
-     *
-     * @return void
-     */
+    //update exam slot
+
     public function updateExamSlot(ExamSlot $examSlot, array $data)
     {
         DB::transaction(function () use ($data, $examSlot) {
@@ -77,21 +55,15 @@ class ExamSlotService
             ]);
         });
 
-        session()->flash('success', 'Exam Slot Updated Successfully');
-
+        return session()->flash('success', 'Exam Slot Updated Successfully');
     }
 
-    /**
-     * Delete exam slot.
-     *
-     * @param ExamSlot $examSlot
-     *
-     * @return void
-     */
+    //delete exam slot
+
     public function deleteExamSlot(ExamSlot $examSlot)
     {
         $examSlot->delete();
-        session()->flash('success', 'Exam Slot Deleted Successfully');
 
+        return session()->flash('success', 'Exam Slot Deleted Successfully');
     }
 }

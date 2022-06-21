@@ -6,40 +6,24 @@ use App\Models\GradeSystem;
 
 class GradeSystemService
 {
-    /**
-     * Get all grades in class group.
-     *
-     * @param int $classGroup_id
-     *
-     * @return App\Model\GradeSystem
-     */
-    public function getAllGradesInClassGroup(int $classGroup_id)
+    //get all grade systems in class group
+
+    public function getAllGradesInClassGroup($classGroupId)
     {
-        $grades = GradeSystem::where('class_group_id', $classGroup_id)->get();
+        $grades = GradeSystem::where('class_group_id', $classGroupId)->get();
 
         return $grades;
     }
 
-    /**
-     * Get grade in classgroup for a percent.
-     *
-     * @param int $classGroup
-     * @param int $percentage
-     *
-     * @return void
-     */
-    public function getGrade(int $classGroup, int $percentage)
+    //get grade from percent
+
+    public function getGrade($classGroup, $percentage)
     {
         return $this->getAllGradesInClassGroup($classGroup)->where('grade_from', '<=', $percentage)->where('grade_till', '>=', $percentage)->first();
     }
 
-    /**
-     * Create grade in gradesystem.
-     *
-     * @param array|object $records
-     *
-     * @return void
-     */
+    //create grade system
+
     public function createGradeSystem($records)
     {
         $gradesInDb = $this->getAllGradesInClassGroup($records['class_group_id']);
@@ -55,18 +39,12 @@ class GradeSystemService
             'name'           => $records['name'],
             'remark'         => $records['remark'],
         ]);
-        session()->flash('success', 'Grade system created successfully');
 
+        return session()->flash('success', 'Grade system created successfully');
     }
 
-    /**
-     * Update frade in gradesystem.
-     *
-     * @param GradeSystem  $grade
-     * @param array|object $records
-     *
-     * @return void
-     */
+    // edit grade system
+
     public function updateGradeSystem(GradeSystem $grade, $records)
     {
         $gradesInDb = $this->getAllGradesInClassGroup($records['class_group_id'])->except($grade->id);
@@ -83,29 +61,20 @@ class GradeSystemService
             'remark'         => $records['remark'],
         ]);
         $grade->save();
-        session()->flash('success', 'Grade updated successfully');
 
+        return session()->flash('success', 'Grade updated successfully');
     }
 
-    /**
-     * Delete Grade in grade system.
-     *
-     * @param GradeSystem $grade
-     *
-     * @return void
-     */
     public function deleteGradeSystem(GradeSystem $grade)
     {
         $grade->delete();
-        session()->flash('success', 'successfully deleted grade');
 
+        return session()->flash('success', 'successfully deleted grade');
     }
 
     /**
      * @param array $grade  with grade_from and grade_till
      * @param array $grades each with grade_from and grade_till (testing against)
-     *
-     * @return bool
      */
     public function gradeRangeExists($grade, $grades)
     {

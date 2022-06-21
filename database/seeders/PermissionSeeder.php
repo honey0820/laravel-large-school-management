@@ -266,11 +266,6 @@ class PermissionSeeder extends Seeder
             'name' => 'delete exam record',
         ]);
 
-        //check result permission
-        Permission::firstOrCreate([
-            'name' => 'check result',
-        ]);
-
         //permission for notices
 
         Permission::firstOrCreate([
@@ -421,7 +416,6 @@ class PermissionSeeder extends Seeder
             'read notice',
             'update notice',
             'delete notice',
-            'check result',
         ]);
 
         //assign permissions to teacher
@@ -445,7 +439,6 @@ class PermissionSeeder extends Seeder
             'update exam record',
             'delete exam record',
             'read notice',
-            'check result',
         ]);
 
         //assign permissions to student
@@ -455,11 +448,9 @@ class PermissionSeeder extends Seeder
             'menu-syllabus',
             'menu-timetable',
             'menu-notice',
-            'menu-exam',
             'read syllabus',
             'read timetable',
             'read notice',
-            'check result',
         ]);
         //assign permissions to parent
 

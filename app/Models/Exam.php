@@ -17,7 +17,6 @@ class Exam extends Model
         'start_date',
         'stop_date',
         'active',
-        'publish_result',
     ];
 
     /**
@@ -30,7 +29,6 @@ class Exam extends Model
         'start_date'        => 'date:Y-m-d',
         'stop_date'         => 'date:Y-m-d',
         'active'            => 'boolean',
-        'publish_result'    => 'boolean',
     ];
 
     public function semester()

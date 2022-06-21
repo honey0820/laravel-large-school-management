@@ -70,10 +70,6 @@ class UserSeeder extends Seeder
 
         $teacher->assignRole('teacher');
 
-        $teacher->teacherRecord()->create([
-            'user_id' => $teacher->id,
-        ]);
-
         $student = User::create([
             'id'                => 4,
             'name'              => 'Jane Doe',
