@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Services\Parent\ParentService;
 use Illuminate\Http\Request;
+use App\Services\Parent\ParentService;
 
 class ParentController extends Controller
 {
-    /**
-     * ParentService variable.
+ /**
+     * ParentService variable
      *
      * @var \App\Services\Parent\ParentService
+     * 
      */
     public ParentService $parent;
 

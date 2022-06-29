@@ -2,12 +2,14 @@
 
 namespace App\Services\Parent;
 
+use App\Models\User;
 use App\Services\User\UserService;
 
-class ParentService
+class ParentService 
 {
+    
     /**
-     * User service variable.
+     * User service variable
      *
      * @var \App\Services\User\UserService
      */
@@ -19,7 +21,7 @@ class ParentService
     }
 
     /**
-     * Get all parents in school.
+     * Get all parents in school
      *
      * @return Illuminate\Eloquent\Database\Collection|static[]
      */
@@ -29,10 +31,10 @@ class ParentService
     }
 
     /**
-     * Create a new parent.
+     * Create a new parent
      *
      * @param collection $record
-     *
+     * 
      * @return void
      */
     public function createParent($record)
@@ -41,14 +43,14 @@ class ParentService
         $parent->assignRole('parent');
         session()->flash('success', 'parent Created Successfully');
 
+        return;
     }
 
     /**
-     * Update a parent.
+     * Update a parent
      *
-     * @param User                    $parent
+     * @param User $parent
      * @param array|object|collection $records
-     *
      * @return void
      */
     public function updateParent(User $parent, $records)
@@ -59,10 +61,9 @@ class ParentService
     }
 
     /**
-     * Delete parent record.
+     * Delete parent record
      *
      * @param User $parent
-     *
      * @return void
      */
     public function deleteParent(User $parent)
@@ -73,12 +74,12 @@ class ParentService
     }
 
     /**
-     * Print a uset profiel.
+     * Print a uset profiel
      *
      * @param string $name
      * @param string $view
-     * @param array  $data
-     *
+     * @param array $data
+     * 
      * @return mixed
      */
     public function printProfile(string $name, string $view, array $data)
