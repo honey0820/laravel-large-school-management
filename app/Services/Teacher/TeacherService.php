@@ -8,12 +8,7 @@ use App\Services\User\UserService;
 
 class TeacherService
 {
-    /**
-     * User service variable.
-     *
-     * @var UserService
-     */
-    public userService $user;
+    public $user;
 
     public function __construct(UserService $user)
     {
@@ -25,29 +20,19 @@ class TeacherService
         return $this->user->getUsersByRole('teacher')->load('teacherRecord');
     }
 
-    /**
-     * Create a new teacher.
-     *
-     * @param collection $record
-     *
-     * @return void
-     */
+    //create teacher method
+
     public function createTeacher($record)
     {
         $teacher = $this->user->createUser($record);
-        $teacher->assignRole('teacher');
-        session()->flash('success', 'Teacher Created Successfully');
 
+        $teacher->assignRole('teacher');
+
+        return session()->flash('success', 'Teacher Created Successfully');
     }
 
-    /**
-     * Update a teacher.
-     *
-     * @param User                    $teacher
-     * @param array|object|collection $records
-     *
-     * @return void
-     */
+    //update teacher method
+
     public function updateTeacher(User $teacher, $records)
     {
         $this->user->updateUser($teacher, $records, 'teacher');
@@ -55,13 +40,8 @@ class TeacherService
         return session()->flash('success', 'Teacher Updated Successfully');
     }
 
-    /**
-     * Delete teacher.
-     *
-     * @param User $teacher
-     *
-     * @return void
-     */
+    //delete teacher method
+
     public function deleteTeacher(User $teacher)
     {
         $this->user->deleteUser($teacher);
@@ -69,15 +49,8 @@ class TeacherService
         return session()->flash('success', 'Teacher Deleted Successfully');
     }
 
-    /**
-     * Print a uset profiel.
-     *
-     * @param string $name
-     * @param string $view
-     * @param array  $data
-     *
-     * @return mixed
-     */
+    //print teacher method
+
     public function printProfile(string $name, string $view, array $data)
     {
         return PrintService::createPdfFromView($name, $view, $data);

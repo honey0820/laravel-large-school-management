@@ -103,16 +103,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(TeacherRecord::class);
     }
 
-    /**
-     * Get the teacherRecord associated with the User.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function parentRecord()
-    {
-        return $this->hasOne(ParentRecord::class);
-    }
-
     //get first name
     public function firstName()
     {

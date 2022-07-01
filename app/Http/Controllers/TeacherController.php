@@ -8,12 +8,7 @@ use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
-    /**
-     * TeacherService variable.
-     *
-     * @var \App\Services\Teacher\TeacherService
-     */
-    public TeacherService $teacher;
+    public $teacher;
 
     public function __construct(TeacherService $teacher)
     {

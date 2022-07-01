@@ -53,7 +53,6 @@ return [
     'list-grade-systems-table'           => 'App\\Http\\Livewire\\ListGradeSystemsTable',
     'list-graduations-table'             => 'App\\Http\\Livewire\\ListGraduationsTable',
     'list-notices-table'                 => 'App\\Http\\Livewire\\ListNoticesTable',
-    'list-parents-table'                 => 'App\\Http\\Livewire\\ListParentsTable',
     'list-promotions-table'              => 'App\\Http\\Livewire\\ListPromotionsTable',
     'list-schools-table'                 => 'App\\Http\\Livewire\\ListSchoolsTable',
     'list-sections-table'                => 'App\\Http\\Livewire\\ListSectionsTable',

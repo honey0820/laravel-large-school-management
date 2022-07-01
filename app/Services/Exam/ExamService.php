@@ -81,6 +81,7 @@ class ExamService
             ]);
         });
         session()->flash('success', 'Exam created successfully');
+
     }
 
     /**
@@ -100,6 +101,7 @@ class ExamService
         $exam->stop_date = $records['stop_date'];
         $exam->save();
         session()->flash('success', 'Exam updated successfully');
+
     }
 
     /**
@@ -115,6 +117,7 @@ class ExamService
         $exam->active = $status;
         $exam->save();
         session()->flash('success', 'Exam status changed successfully');
+
     }
 
     /**

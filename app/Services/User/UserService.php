@@ -161,20 +161,7 @@ class UserService
      *
      * @return void
      */
-    public function deleteUser(User $user)
-    {
-        $user->delete();
-    }
-
-    /**
-     * verify user role or return 404.
-     *
-     * @param User   $user
-     * @param string $role
-     *
-     * @return void
-     */
-    public function verifyUserIsOfRoleElseNotFound(User $user, string $role)
+    public function verifyUserIsOfRoleElseNotFound(User $user, $role)
     {
         if (!$this->verifyRole($user->id, $role)) {
             abort(404);
