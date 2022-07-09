@@ -118,6 +118,11 @@ Route::middleware('auth:sanctum', 'verified')->prefix('dashboard')->namespace('A
         //teacher routes
         Route::resource('teachers', TeacherController::class);
 
+        //parent routes
+        Route::resource('parents', ParentController::class);
+        Route::get('parents/{parent}/assign-students-to-parent', ['App\Http\Controllers\ParentController', 'assignStudentsView'])->name('parents.assign-students');
+        Route::post('parents/{parent}/assign-students-to-parent', ['App\Http\Controllers\ParentController', 'assignStudent']);
+
         //academic year routes
         Route::resource('academic-years', AcademicYearController::class);
         Route::post('academic-years/set', ['App\Http\Controllers\AcademicYearController', 'setAcademicYear'])->name('academic-years.set-academic-year');
