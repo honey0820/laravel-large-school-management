@@ -112,5 +112,6 @@ class ParentService
             $parent->parentRecord->students()->syncWithoutDetaching($student);
             session()->flash('success', 'Student successfully assigned to parent');
         }
+
     }
 }
