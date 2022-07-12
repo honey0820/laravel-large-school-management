@@ -70,7 +70,6 @@ class ResultTabulation extends Component
         $tabulatedRecords = [];
         if ($this->students->isEmpty()) {
             $this->createdTabulation = false;
-
             return $tabulatedRecords;
         }
         foreach ($this->students as $student) {
