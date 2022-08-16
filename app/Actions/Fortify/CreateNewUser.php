@@ -2,12 +2,12 @@
 
 namespace App\Actions\Fortify;
 
+use Throwable;
 use App\Models\User;
+use Laravel\Jetstream\Jetstream;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
-use Laravel\Jetstream\Jetstream;
-use Throwable;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -59,8 +59,10 @@ class CreateNewUser implements CreatesNewUsers
             $user->sendEmailVerificationNotification();
         } catch (Throwable $e) {
             report("Could not send email to $user->email. $e");
-        }
 
+            return $user;
+        }
+        
         return $user;
     }
 }
