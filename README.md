@@ -19,7 +19,7 @@ Skuul is a multi school management system that aims to make school administratio
 ```shell
 git clone https://github.com/yungifez/skuul ./skuul
  ```
-* Head to the project's directory
+* Head to the projects directory
 ```shell
 cd skuul
  ```
