@@ -10,22 +10,7 @@ use Livewire\Component;
 
 class ResultChecker extends Component
 {
-    public $section;
-    public $sections;
-    public $classes;
-    public $class;
-    public $students;
-    public $student;
-    public $academicYears;
-    public $academicYear;
-    public $semesters;
-    public $semester;
-    public $exams;
-    public $examRecords;
-    public $subjects;
-    public $preparedResults;
-    public $status;
-    public $studentName;
+    public $section, $sections, $classes, $class, $students, $student, $academicYears, $academicYear, $semesters, $semester, $exams, $examRecords, $subjects, $preparedResults, $status, $studentName;
 
     //rules
     public $rules = [
@@ -115,8 +100,7 @@ class ResultChecker extends Component
         // fetch all exams, subjects and exam records for user in semester
         $this->exams = $semester->exams()->where('publish_result', true)->get();
         if ($this->exams->isEmpty()) {
-            $this->status = 'There are no exams with published results for now';
-
+            $this->status = "There are no exams with published results for now";
             return $this->preparedResults = false;
         }
 
