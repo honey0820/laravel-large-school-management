@@ -53,7 +53,8 @@ class PromoteStudents extends Component
     public function loadInitialOldSections()
     {
         $this->oldSections = collect($this->classes->first()['sections']);
-        if ($this->oldSections->isNotEmpty()) {
+        if ($this->oldSections->isNotEmpty()) {    
+            
             $this->oldSection = $this->oldSections->first()['id'];
         }
     }
@@ -61,7 +62,7 @@ class PromoteStudents extends Component
     public function loadInitialNewSections()
     {
         $this->newSections = collect($this->classes->first()['sections']);
-        if ($this->newSections->isNotEmpty()) {
+        if ($this->newSections->isNotEmpty()) { 
             $this->newSection = $this->newSections->first()['id'];
         }
     }
