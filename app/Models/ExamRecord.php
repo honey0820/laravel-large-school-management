@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Subject;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ExamRecord extends Model
 {
@@ -19,7 +20,7 @@ class ExamRecord extends Model
     ];
 
     /**
-     * Get the subject that owns the ExamRecord.
+     * Get the subject that owns the ExamRecord
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

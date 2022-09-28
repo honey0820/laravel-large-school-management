@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\StudentRecord;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class AcademicYear extends Model
@@ -31,9 +32,9 @@ class AcademicYear extends Model
     {
         return $this->hasMany(Semester::class);
     }
-
+    
     /**
-     * The studentRecords that belong to the AcademicYear.
+     * The studentRecords that belong to the AcademicYear
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

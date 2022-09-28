@@ -78,6 +78,8 @@ class ExamService
             'stop_date'   => $records['stop_date'],
         ]);
         session()->flash('success', 'Exam created successfully');
+
+        return;
     }
 
     /**
@@ -112,6 +114,8 @@ class ExamService
         $exam->active = $status;
         $exam->save();
         session()->flash('success', 'Exam status changed successfully');
+
+        return;
     }
 
     /**
@@ -127,6 +131,8 @@ class ExamService
         $exam->publish_result = $status;
         $exam->save();
         session()->flash('success', 'Result published status changed successfully');
+
+        return;
     }
 
     /**
@@ -140,6 +146,8 @@ class ExamService
     {
         $exam->delete();
         session()->flash('success', 'Exam deleted successfully');
+
+        return;
     }
 
     /**

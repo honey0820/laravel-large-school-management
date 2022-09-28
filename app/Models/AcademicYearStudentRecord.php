@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\MyClass;
+use App\Models\Section;
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class AcademicYearStudentRecord extends Pivot
 {
@@ -16,7 +18,7 @@ class AcademicYearStudentRecord extends Pivot
     protected $fillable = ['my_class_id', 'section_id'];
 
     /**
-     * Get the studentRecord that owns the AcademicYearStudentRecord.
+     * Get the studentRecord that owns the AcademicYearStudentRecord
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -26,7 +28,7 @@ class AcademicYearStudentRecord extends Pivot
     }
 
     /**
-     * Get the class that owns the AcademicYearStudentRecord.
+     * Get the class that owns the AcademicYearStudentRecord
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -36,7 +38,7 @@ class AcademicYearStudentRecord extends Pivot
     }
 
     /**
-     * Get the section that owns the AcademicYearStudentRecord.
+     * Get the section that owns the AcademicYearStudentRecord
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
