@@ -3,10 +3,11 @@
 namespace App\Services\Exam;
 
 use App\Models\Exam;
-use App\Models\ExamRecord;
 use App\Models\Semester;
-use App\Services\Subject\SubjectService;
+use App\Models\ExamRecord;
 use Illuminate\Support\Facades\DB;
+use App\Services\Exam\ExamSlotService;
+use App\Services\Subject\SubjectService;
 
 class ExamRecordService
 {
