@@ -2,14 +2,16 @@
 
 namespace App\Services\Student;
 
-use App\Models\Promotion;
 use App\Models\User;
-use App\Services\MyClass\MyClassService;
-use App\Services\Print\PrintService;
-use App\Services\Section\SectionService;
+use App\Models\School;
+use App\Models\Promotion;
+use Illuminate\Support\Str;
+use App\Models\StudentRecord;
 use App\Services\User\UserService;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+use App\Services\Print\PrintService;
+use App\Services\MyClass\MyClassService;
+use App\Services\Section\SectionService;
 
 class StudentService
 {
@@ -103,11 +105,12 @@ class StudentService
     /**
      * Create record for student.
      *
+     * @param User $student $name
      * @param [type] $record
      *
      * @return void
      */
-    public function createStudentRecord($student, $record)
+    public function createStudentRecord(User $student, $record)
     {
         $record['admission_number'] || $record['admission_number'] = $this->generateAdmissionNumber();
         $section = $this->section->getSectionById($record['section_id']);
@@ -118,8 +121,8 @@ class StudentService
         }
 
         $student->studentRecord()->firstOrCreate([
-            'user_id' => $student->id
-        ],[
+            'user_id' => $student->id,
+        ], [
             'my_class_id'      => $record['my_class_id'],
             'section_id'       => $record['section_id'],
             'admission_number' => $record['admission_number'],
@@ -166,9 +169,19 @@ class StudentService
      *
      * @return string
      */
-    public function generateAdmissionNumber()
+    public function generateAdmissionNumber($schoolId = null)
     {
-        return Str::random(10);
+        $schoolInitials = School::find($schoolId)->initials ?? auth()->user()->school->initials;
+        $currentYear = date('y');
+        do {
+            $admissionNumber = "$schoolInitials/$currentYear/".\mt_rand('100000','999999');
+            if(StudentRecord::where('admission_number', $admissionNumber )->count() <= 0){
+                $uniqueAdmissionNumberFound = true;
+            }else{
+                $uniqueAdmissionNumberFound = false;
+            }
+        } while ($uniqueAdmissionNumberFound == false);
+        return $admissionNumber;
     }
 
     public function printProfile(string $name, string $view, array $data)
