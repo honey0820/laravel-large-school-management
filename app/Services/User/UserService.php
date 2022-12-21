@@ -76,7 +76,6 @@ class UserService
         $user = $this->createUserAction->create([
             'name'                  => $record['name'],
             'email'                 => $record['email'],
-            'photo'                 => $record['profile_photo'] ?? null,
             'password'              => $record['password'],
             'school_id'             => $record['school_id'],
             'birthday'              => $record['birthday'],
@@ -90,6 +89,10 @@ class UserService
             'gender'                => $record['gender'],
             'phone'                 => $record['phone'],
         ]);
+
+        if (isset($record['profile_photo'])) {
+            $user->updateProfilePhoto($record['profile_photo']);
+        }
 
         return $user;
     }
