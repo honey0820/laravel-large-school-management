@@ -194,9 +194,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $description = [];
         if ($this->school) {
-            $description[] = $this->school->academicYear ? 'Academic year: '.$this->school->academicYear->name() : '';
-            $description[] = $this->school->semester ? 'Semester: '.$this->school->semester->name : '';
+            $description[] =  $this->school->academicYear ?"Academic year: ".$this->school->academicYear->name(): "";
+            $description[] =  $this->school->semester ?"Semester: ".$this->school->semester->name: "";
         }
+
 
         return $descriptionString = implode(', ', $description);
     }
