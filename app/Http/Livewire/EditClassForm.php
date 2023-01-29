@@ -2,12 +2,13 @@
 
 namespace App\Http\Livewire;
 
-use App\Services\MyClass\MyClassService;
+use App\Models\MyClass;
 use Livewire\Component;
+use App\Services\MyClass\MyClassService;
 
 class EditClassForm extends Component
 {
-    public object $myClass;
+    public MyClass $myClass;
 
     public $classGroups;
 

@@ -2,21 +2,15 @@
 
 namespace App\Http\Livewire;
 
-use App\Services\MyClass\MyClassService;
-use App\Services\Student\StudentService;
-use Illuminate\Support\Facades\App;
 use Livewire\Component;
+use Illuminate\Support\Facades\App;
+use App\Services\MyClass\MyClassService;
+use App\Services\Section\SectionService;
+use App\Services\Student\StudentService;
 
 class PromoteStudents extends Component
 {
-    public $classes;
-    public $oldClass;
-    public $oldSections;
-    public $oldSection;
-    public $newClass;
-    public $newSections;
-    public $newSection;
-    public $students;
+    public $classes, $oldClass, $oldSections, $oldSection, $newClass, $newSections, $newSection, $students;
 
     protected $rules = [
         'oldClass'   => 'required|exists:my_classes,id',
@@ -71,13 +65,8 @@ class PromoteStudents extends Component
     public function loadStudents()
     {
         $this->validate();
-
-        // it was with this line of code that I knew ive run mad
-        // $this->students = App::make(MyClassService::class)->getClassById($this->oldClass)->sections->where('id', $this->oldSection)->load('studentRecords')->first()->studentRecords->load('user');
-
-        $this->students = App::make(StudentService::class)->getAllActiveStudents()->load('studentRecord')->filter(function ($student) {
-            return $student->studentRecord->my_class_id == $this->oldClass && $student->studentRecord->section_id == $this->oldSection;
-        });
+        
+        $this->students = App::make(SectionService::class)->getSectionById($this->oldSection)->students();
     }
 
     public function render()

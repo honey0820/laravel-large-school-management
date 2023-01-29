@@ -8,6 +8,7 @@ class EditSectionForm extends Component
 {
     public $section;
 
+
     public function render()
     {
         return view('livewire.edit-section-form');

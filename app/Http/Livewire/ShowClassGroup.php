@@ -3,16 +3,11 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use App\Models\ClassGroup;
 
 class ShowClassGroup extends Component
 {
-    public $classGroup;
-
-    public function mount()
-    {
-        $this->classGroup = $this->classGroup->load('classes');
-    }
-
+    public ClassGroup $classGroup;
     public function render()
     {
         return view('livewire.show-class-group');

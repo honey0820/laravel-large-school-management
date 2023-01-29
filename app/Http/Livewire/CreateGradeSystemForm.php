@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Services\MyClass\MyClassService;
 use Livewire\Component;
+use App\Services\MyClass\MyClassService;
 
 class CreateGradeSystemForm extends Component
 {
@@ -13,7 +13,7 @@ class CreateGradeSystemForm extends Component
     {
         $this->classGroups = $myClassService->getAllClassGroups();
     }
-
+    
     public function render()
     {
         return view('livewire.create-grade-system-form');

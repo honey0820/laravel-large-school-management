@@ -113,6 +113,6 @@ class MyClassController extends Controller
     {
         $this->myClassService->deleteClass($class);
 
-        return back()->with('success', __('Class deleted successfully'));
+        return back()->flash('success', __('Class deleted successfully'));
     }
 }
