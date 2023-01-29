@@ -1,4 +1,4 @@
-<x-partials.action-section>
+<x-jet-action-section>
     <x-slot name="title">
         {{ __('Browser Sessions') }}
     </x-slot>
@@ -8,9 +8,9 @@
     </x-slot>
 
     <x-slot name="content">
-        <x-action-message on="loggedOut">
-            {{ __('Logged Out Of All Browsers.') }}
-        </x-action-message>
+        <x-jet-action-message on="loggedOut">
+            {{ __('Done.') }}
+        </x-jet-action-message>
 
         <div>
             {{ __('If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.') }}
@@ -20,7 +20,7 @@
             <div class="mt-3">
                 <!-- Other Browser Sessions -->
                 @foreach ($this->sessions as $session)
-                    <div class="flex gap-3">
+                    <div class="d-flex">
                         <div>
                             @if ($session->agent->isDesktop())
                                 <svg fill="none" width="32" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="text-muted">
@@ -33,13 +33,13 @@
                             @endif
                         </div>
 
-                        <div class="">
+                        <div class="ms-2">
                             <div>
                                 {{ $session->agent->platform() }} - {{ $session->agent->browser() }}
                             </div>
 
                             <div>
-                                <div class="small font-light">
+                                <div class="small font-weight-lighter text-muted">
                                     {{ $session->ip_address }},
 
                                     @if ($session->is_current_device)
@@ -55,35 +55,42 @@
             </div>
         @endif
 
-        <x-modal background-colour="bg-red-700" >
-            <x-slot:button-text >
-                Log Out Other Browser Sessions
-            </x-slot:button-text>
-            <x-slot:title >
-                <p class="text-lg md:text-2xl">
-                    Log Out Other Browser Sessions
-                </p>
-            </x-slot:title>
+        <div class="d-flex mt-3">
+            <x-jet-button wire:click="confirmLogout" wire:loading.attr="disabled">
+                {{ __('Log Out Other Browser Sessions') }}
+            </x-jet-button>
+        </div>
 
-            <p class="px-4 text-center">
+        <!-- Log out Other Devices Confirmation Modal -->
+        <x-jet-dialog-modal wire:model="confirmingLogout">
+            <x-slot name="title">
+                {{ __('Log Out Other Browser Sessions') }}
+            </x-slot>
+
+            <x-slot name="content">
                 {{ __('Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices.') }}
-            </p>
 
-            <div class="my-3" x-data="{}" x-on:confirming-logout-other-browser-sessions.window="setTimeout(() => $refs.password.focus(), 250)">
-                <x-input id="password-for-logout" name="password" type="password" placeholder="{{ __('Password') }}"
-                    label="Confirm Password to continue"
-                    x-ref="password"
-                    class="w-full"
-                    wire:model.defer="password"
-                    wire:keydown.enter="logoutOtherBrowserSessions" />
-            </div>
+                <div class="mt-3 w-md-75" x-data="{}" x-on:confirming-logout-other-browser-sessions.window="setTimeout(() => $refs.password.focus(), 250)">
+                    <x-jet-input type="password" placeholder="{{ __('Password') }}"
+                                 x-ref="password"
+                                 class="{{ $errors->has('password') ? 'is-invalid' : '' }}"
+                                 wire:model.defer="password"
+                                 wire:keydown.enter="logoutOtherBrowserSessions" />
+
+                    <x-jet-input-error for="password" class="mt-2" />
+                </div>
+            </x-slot>
 
             <x-slot name="footer">
-                <x-button class="bg-red-600 text-sm px-2 md:px-4" wire:click="logoutOtherBrowserSessions" wire:loading.attr="disabled" x-init="$wire.on('loggedOut', () => {modal = false})">
+                <x-jet-secondary-button wire:click="$toggle('confirmingLogout')" wire:loading.attr="disabled">
+                    {{ __('Cancel') }}
+                </x-jet-secondary-button>
+
+                <x-jet-button class="ms-2" wire:click="logoutOtherBrowserSessions" wire:loading.attr="disabled">
                     {{ __('Log out Other Browser Sessions') }}
-                </x-button>
+                </x-jet-button>
             </x-slot>
-        </x-modal>
+        </x-jet-dialog-modal>
     </x-slot>
 
-</x-partials.action-section>
+</x-jet-action-section>

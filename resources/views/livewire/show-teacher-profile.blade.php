@@ -1,3 +1,1 @@
-<div>
-    <livewire:show-user-profile :user="$teacher" />
-</div>
+@livewire('show-user-profile', ['user' => $teacher])

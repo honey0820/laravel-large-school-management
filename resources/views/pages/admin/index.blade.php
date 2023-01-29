@@ -1,12 +1,24 @@
-@extends('layouts.app', ['breadcrumbs' => [
-    ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
-    ['href'=> route('admins.index'), 'text'=> 'Administrators', 'active'],
-]])
+@extends('adminlte::page')
 
-@section('title',  __('Administrators'))
+@section('title', __('Admins'))
 
-@section('page_heading',   __('Administrators'))
 
-@section('content', )
+@section('content_header')
+    <h1 class=""> 
+        {{ __('Admins') }}
+    </h1>
+
+    @livewire('show-set-school')
+    
+    @livewire('breadcrumbs', ['paths' => [
+        ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
+        ['href'=> route('admins.index'), 'text'=> 'admins', 'active'],
+    ]])
+
+@stop
+
+@section('content') 
     @livewire('list-admins-table')
-@endsection
+    
+    @livewire('display-status')
+@stop

@@ -1,13 +1,25 @@
-@extends('layouts.app', ['breadcrumbs' => [
-    ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
-    ['href'=> route('grade-systems.index'), 'text'=> 'grade-systems'],
-    ['href'=> route('grade-systems.create'), 'text'=> 'create', 'active'],
-]])
+@extends('adminlte::page')
 
-@section('title', __('Create Grade'))
+@section('title', __('Create grade'))
 
-@section('page_heading', __('Create Grade'))
 
-@section('content')
+@section('content_header')
+    <h1 class="">
+        {{ __('Create grade') }}
+    </h1>
+
+    @livewire('show-set-school')
+    
+    @livewire('breadcrumbs', ['paths' => [
+        ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
+        ['href'=> route('grade-systems.index'), 'text'=> 'grade-systems'],
+        ['href'=> route('grade-systems.create'), 'text'=> 'create', 'active'],
+    ]])
+
+@stop
+
+@section('content') 
     @livewire('create-grade-system-form')
-@endsection
+
+    @livewire('display-status')
+@stop

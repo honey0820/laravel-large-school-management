@@ -1,13 +1,25 @@
-@extends('layouts.app', ['breadcrumbs' => [
+@extends('adminlte::page')
+
+@section('title', __('Create parent'))
+
+
+@section('content_header')
+    <h1 class="">
+        {{ __('Create parent') }}
+    </h1>
+
+    @livewire('show-set-school')
+    
+    @livewire('breadcrumbs', ['paths' => [
         ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
-        ['href'=> route('parents.index'), 'text'=> 'Parent'],
+        ['href'=> route('parents.index'), 'text'=> 'parents'],
         ['href'=> route('parents.create'), 'text'=> 'create', 'active'],
-]])
+    ]])
 
-@section('title',  __('Create parent'))
+@stop
 
-@section('page_heading',   __('Create parent'))
-
-@section('content' )
+@section('content') 
     @livewire('create-parent-form')
-@endsection
+
+    @livewire('display-status')
+@stop

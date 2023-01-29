@@ -1,12 +1,24 @@
-@extends('layouts.app', ['breadcrumbs' => [
-    ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
-    ['href'=> route('students.index'), 'text'=> 'Students', 'active'],
-]])
+@extends('adminlte::page')
 
-@section('title',  __('Students'))
+@section('title', __('Students'))
 
-@section('page_heading',   __('Students'))
 
-@section('content', )
+@section('content_header')
+    <h1 class=""> 
+        {{ __('Students') }}
+    </h1>
+
+    @livewire('show-set-school')
+    
+    @livewire('breadcrumbs', ['paths' => [
+        ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
+        ['href'=> route('students.index'), 'text'=> 'Students', 'active'],
+    ]])
+
+@stop
+
+@section('content') 
     @livewire('list-students-table')
-@endsection
+    
+    @livewire('display-status')
+@stop

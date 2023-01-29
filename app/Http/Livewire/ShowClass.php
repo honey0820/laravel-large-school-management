@@ -11,8 +11,10 @@ class ShowClass extends Component
 
     public function mount()
     {
-        $this->class = $this->class;
+        $this->class = $this->class->load('studentRecords', 'studentRecords.user', 'subjects', 'subjects.teachers');
+        $this->students = $this->class->students();
     }
+
     public function render()
     {
         return view('livewire.show-class');

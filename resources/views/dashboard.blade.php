@@ -1,15 +1,47 @@
-@extends('layouts.app', ['breadcrumbs' => [
-    ['href'=> route('dashboard'), 'text'=> 'Dashboard', 'active'],
-]])
+@extends('adminlte::page')
 
 @section('title', __('Dashboard'))
 
-@section('page_heading', 'Dashboard')
+@section('content_header')
+    <h1 class="">
+        {{ __('Dashboard') }}
+    </h1>
+
+    @livewire('show-set-school')
+    
+    @livewire('breadcrumbs', ['paths' => [
+        ['href'=> route('dashboard'), 'text'=> 'Dashboard', 'active'],
+    ]])
+
+@stop
 
 @section('content')
+    
+    <div class="my-3">@livewire('school-set')</div>
+    @livewire('dashboard-data-cards')
+    
+    @livewire('academic-year-set')
 
-    <livewire:set-school />
+    @if (auth()->user()->hasRole('student'))
+        <a href="{{route('students.print-profile',auth()->user()->id)}}" >
+            <x-adminlte-small-box title="Download profile" text="click to download profile" icon="fas fa-download text-white"
+            theme="secondary"/>
+        </a>
+    @endif
+    
+    @can('read notice') 
+        @livewire('list-notices-table')
+    @endcan
 
-    <livewire:dashboard-data-cards />
+    @if (auth()->user()->hasRole('applicant'))
+        {{--Contains status history--}}
+        @livewire('change-account-application-status', ['applicant' => auth()->user()])
+    @endif
 
-@endsection
+    @livewire('display-status')
+
+    @can('read applicant')
+        @livewire('list-account-applications-table')
+    @endcan
+@stop
+

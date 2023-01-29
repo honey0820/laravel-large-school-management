@@ -1,13 +1,17 @@
-@extends('layouts.guest')
-
-@section('title', 'Login')
+@extends('layouts.register')
 
 @section('body')
-    <x-partials.authentication-card class="md:w-10/12 lg:w-11/12 xl:w-11/12">
-        <x-display-validation-errors />
-        <livewire:registration-form />
-        <div class="py-6">
-            <p>Have An account? <a href="{{route('login')}}" class="text-blue-800"> Login </a></p>
+    <div class="container">
+        <div class="row justify-content-center my-5">
+            <div class=" col-lg-10 my-4">
+                <div class="col-md-7 m-auto ">
+                    <x-jet-authentication-card-logo />
+                </div>
+                <div class="card shadow-sm px-1">
+                    @livewire('user-registration-form')
+                </div>
+            </div>
         </div>
-    </x-partials.authentication-card>
+    </div>
+    @livewire('display-status')
 @endsection

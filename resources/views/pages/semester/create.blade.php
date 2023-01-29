@@ -1,13 +1,25 @@
-@extends('layouts.app', ['breadcrumbs' => [
-    ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
-    ['href'=> route('semesters.index'), 'text'=> 'Semesters'],
-    ['href'=> route('semesters.create'), 'text'=> 'Create' , 'active'],
-]])
+@extends('adminlte::page')
 
-@section('title', __('Create semester'))
+@section('title', __('Create Semester'))
 
-@section('page_heading',  __('Create semester'))
 
-@section('content' )
+@section('content_header')
+    <h1 class=""> 
+        {{ __('Create semester') }}
+    </h1>
+
+    @livewire('show-set-school')
+    
+    @livewire('breadcrumbs', ['paths' => [
+        ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
+        ['href'=> route('semesters.index'), 'text'=> 'semesters'],
+        ['href'=> route('semesters.create'), 'text'=> 'create', 'active'],
+    ]])
+
+@stop
+
+@section('content') 
     @livewire('create-semester-form')
-@endsection
+
+    @livewire('display-status')
+@stop

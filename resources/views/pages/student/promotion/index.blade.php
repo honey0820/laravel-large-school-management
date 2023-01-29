@@ -1,19 +1,28 @@
+@extends('adminlte::page')
+
 @php
     $currentAcademicYear = auth()->user()->school->load('academicYear')->academicYear;
 @endphp
+@section('title', __('Manage Promotions'))
 
-@extends('layouts.app', ['breadcrumbs' => [
+
+@section('content_header')
+    <h1 class=""> 
+        {{ __('Promote Students') }}
+    </h1>
+
+    @livewire('show-set-school')
+    
+    @livewire('breadcrumbs', ['paths' => [
         ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
         ['href'=> route('students.index'), 'text'=> 'Students'],
         ['href'=> route('students.promote'), 'text'=> "Promotions for $currentAcademicYear->start_year - $currentAcademicYear->stop_year", 'active'],
+    ]])
 
-]])
+@stop
 
-@section('title', __('Manage Promotions'))
-
-@section('page_heading',  __('Manage Promotions'))
-
-@section('content', )
-
+@section('content') 
     @livewire('list-promotions-table',['academicYear'=> $currentAcademicYear->id])
-@endsection
+    
+    @livewire('display-status')
+@stop

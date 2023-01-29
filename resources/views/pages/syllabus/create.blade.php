@@ -1,13 +1,25 @@
-@extends('layouts.app', ['breadcrumbs' => [
-    ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
-    ['href'=> route('notices.index'), 'text'=> 'notices'],
-    ['href'=> route('notices.create'), 'text'=> 'create', 'active'],
-]])
+@extends('adminlte::page')
 
-@section('title', __('Create notices'))
+@section('title', __('Create Syllabus'))
 
-@section('page_heading',  __('Create notices'))
 
-@section('content' )
-    @livewire('create-notice-form')
-@endsection
+@section('content_header')
+    <h1 class=""> 
+        {{ __('Create Syllabus') }}
+    </h1>
+
+    @livewire('show-set-school')
+    
+    @livewire('breadcrumbs', ['paths' => [
+        ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
+        ['href'=> route('syllabi.index'), 'text'=> 'syllabi'],
+        ['href'=> route('syllabi.create'), 'text'=> 'create', 'active'],
+    ]])
+
+@stop
+
+@section('content') 
+    @livewire('create-syllabus-form')
+
+    @livewire('display-status')
+@stop
