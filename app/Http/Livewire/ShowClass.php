@@ -13,7 +13,6 @@ class ShowClass extends Component
     {
         $this->class = $this->class;
     }
-
     public function render()
     {
         return view('livewire.show-class');

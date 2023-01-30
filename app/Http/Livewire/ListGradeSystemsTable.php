@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Services\MyClass\MyClassService;
 use Livewire\Component;
+use App\Services\MyClass\MyClassService;
 
 class ListGradeSystemsTable extends Component
 {

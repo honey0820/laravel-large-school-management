@@ -3,8 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\MyClass;
-use App\Services\MyClass\MyClassService;
 use Livewire\Component;
+use App\Services\MyClass\MyClassService;
 
 class EditClassForm extends Component
 {

@@ -8,9 +8,7 @@ use Livewire\Component;
 
 class CreateSubjectForm extends Component
 {
-    public $classes;
-    public $teachers;
-
+    public $classes, $teachers;
     public function mount(MyClassService $myClassService, TeacherService $teacherService)
     {
         $this->classes = $myClassService->getAllClasses();

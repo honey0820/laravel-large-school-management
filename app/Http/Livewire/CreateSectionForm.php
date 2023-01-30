@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Services\MyClass\MyClassService;
 use Livewire\Component;
+use App\Services\MyClass\MyClassService;
 
 class CreateSectionForm extends Component
 {
@@ -13,7 +13,7 @@ class CreateSectionForm extends Component
     {
         $this->myClasses = $classService->getAllClasses();
     }
-
+    
     public function render()
     {
         return view('livewire.create-section-form');

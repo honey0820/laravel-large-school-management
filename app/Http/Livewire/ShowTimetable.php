@@ -11,9 +11,7 @@ use Livewire\Component;
 class ShowTimetable extends Component
 {
     public Timetable $timetable;
-    public $weekDays;
-    public $timeSlots;
-    public $weekdays;
+    public $weekDays, $timeSlots, $weekdays;
     public $subjects;
     public $customItems;
     public bool $disableEmitCellInformationDetail = true;

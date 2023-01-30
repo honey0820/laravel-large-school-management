@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Services\MyClass\MyClassService;
 use Livewire\Component;
+use App\Services\MyClass\MyClassService;
 
 class ListSubjectsTable extends Component
 {
@@ -27,7 +27,7 @@ class ListSubjectsTable extends Component
 
         $this->emit('$refresh');
     }
-
+    
     public function render()
     {
         return view('livewire.list-subjects-table');

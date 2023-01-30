@@ -13,7 +13,6 @@ class ApplicationHistory extends Component
     {
         $this->applicant->loadMissing('accountApplication', 'accountApplication.statuses');
     }
-
     public function render()
     {
         return view('livewire.application-history');

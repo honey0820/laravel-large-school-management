@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Services\Semester\SemesterService;
 use Livewire\Component;
+use App\Services\Semester\SemesterService;
 
 class SetSemester extends Component
 {
@@ -13,7 +13,6 @@ class SetSemester extends Component
     {
         $this->semesters = $semesterService->getAllSemestersInAcademicYear(auth()->user()->school->academicYear->id);
     }
-
     public function render()
     {
         return view('livewire.set-semester');

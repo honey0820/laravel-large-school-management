@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Services\AcademicYear\AcademicYearService;
 use Livewire\Component;
+use App\Services\AcademicYear\AcademicYearService;
 
 class ListPromotionsTable extends Component
 {

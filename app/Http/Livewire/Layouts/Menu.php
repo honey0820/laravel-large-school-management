@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Layouts;
 
 use Livewire\Component;
 
+use function PHPSTORM_META\map;
+
 class Menu extends Component
 {
     public $menu;
@@ -30,13 +32,13 @@ class Menu extends Component
                 'text' => 'Schools',
                 'icon' => 'fas fa-school',
                 'can'  => 'menu-school',
-
+    
                 'submenu' => [[
                     'type'  => 'menu-item',
                     'text'  => 'View Schools',
                     'route' => 'schools.index',
                     'can'   => 'read school',
-                ],
+                    ],
                     [
                         'type'  => 'menu-item',
                         'text'  => 'Create School',
@@ -83,7 +85,7 @@ class Menu extends Component
                         'route' => 'classes.create',
                         'can'   => 'create class',
                     ],
-
+    
                 ],
             ],
             [
@@ -434,14 +436,15 @@ class Menu extends Component
                 ],
             ],
             [
-                'type'    => 'menu-item',
-                'text'    => 'View Logs',
+                'type'  => 'menu-item',
+                'text'  => 'View Logs',
                 'route'   => 'blv.index',
-                'icon'    => 'fa fa-sticky-note',
+                'icon'  => 'fa fa-sticky-note',
                 //it checks with roles for now so this is to prevent other users from viewing menu item
                 'can'   => 'view logs',
             ],
         ];
+
     }
 
     public function render()
