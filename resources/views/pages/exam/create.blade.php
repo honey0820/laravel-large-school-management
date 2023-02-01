@@ -1,13 +1,25 @@
-@extends('layouts.app', ['breadcrumbs' => [
-        ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
-        ['href'=> route('exams.index'), 'text'=> 'exams'],
-        ['href'=> route('exams.create'), 'text'=> 'create', 'active'],
-]])
+@extends('adminlte::page')
 
 @section('title', __('Create exams'))
 
-@section('page_heading',  __('Create exams'))
 
-@section('content' )
+@section('content_header')
+    <h1 class=" ">
+        {{ __('Create exams') }}
+    </h1>
+
+    @livewire('show-set-school')
+    
+    @livewire('breadcrumbs', ['paths' => [
+        ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
+        ['href'=> route('exams.index'), 'text'=> 'exams'],
+        ['href'=> route('exams.create'), 'text'=> 'create', 'active'],
+    ]])
+
+@stop
+
+@section('content') 
     @livewire('create-exam-form')
-@endsection
+
+    @livewire('display-status')
+@stop

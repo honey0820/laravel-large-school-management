@@ -2,12 +2,16 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\ClassGroup;
 use Livewire\Component;
 
 class ShowClassGroup extends Component
 {
-    public ClassGroup $classGroup;
+    public $classGroup;
+
+    public function mount()
+    {
+        $this->classGroup = $this->classGroup->load('classes');
+    }
 
     public function render()
     {

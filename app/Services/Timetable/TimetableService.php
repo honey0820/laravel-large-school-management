@@ -117,7 +117,6 @@ class TimetableService
 
     public function deleteCustomTimetableItem(CustomTimetableItem $customTimetableItem)
     {
-        $customTimetableItem->timetableRecord()->delete();
         $customTimetableItem->delete();
     }
 }

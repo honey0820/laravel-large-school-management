@@ -3,25 +3,19 @@
 namespace App\Http\Livewire;
 
 use App\Models\Exam;
-use App\Models\ExamRecord;
 use App\Models\Section;
 use App\Models\Subject;
-use App\Models\User;
 use App\Services\Exam\ExamService;
 use App\Services\MyClass\MyClassService;
 use App\Services\Section\SectionService;
 use App\Services\Subject\SubjectService;
-use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
-use Livewire\WithPagination;
 
 class ListExamRecordsTable extends Component
 {
-    use WithPagination;
     protected $queryString = ['sectionSelectedId', 'examSelectedId', 'subjectSelectedId'];
     public $semester;
-    public Collection $exams;
-    public $examSlots;
+    public $exams;
     public $exam;
     public $classes;
     public $class;
@@ -35,6 +29,7 @@ class ListExamRecordsTable extends Component
     public $sectionSelected;
     public $examSelected;
     public $error;
+    public $students;
     public $sectionSelectedId;
     public $examSelectedId;
     public $subjectSelectedId;
@@ -84,15 +79,14 @@ class ListExamRecordsTable extends Component
     public function fetchExamRecords(Exam $exam, Section $section, Subject $subject)
     {
         $this->examSlots = $exam->examSlots;
-        $this->examRecords = ExamRecord::inSubject($subject->id)->inSection($section->id)->get();
+        $this->examRecords = app('App\Services\Exam\ExamRecordService')->getAllExamRecordsInSectionAndSubject($section->id, $subject->id);
         if ($this->examSlots->isEmpty()) {
             $this->examSlots = null;
             $this->error = 'No exam slots found';
 
             return;
         }
-
-        //set variables used for controlling state, holding state data and querystrings
+        //set variables used for controlling state, holding state f=data and querystrings
         $this->examSelected = $exam;
         $this->examSelectedId = $this->examSelected->id;
         $this->sectionSelected = $section;
@@ -100,18 +94,11 @@ class ListExamRecordsTable extends Component
         $this->classSelected = $section->myClass;
         $this->subjectSelected = $subject;
         $this->subjectSelectedId = $this->subjectSelected->id;
+        $this->students = $section->students();
     }
 
     public function render()
     {
-        $section = $this->sections->find($this->section);
-        if ($section != null && $section->exists()) {
-            $students = User::students()->inSchool()->whereRelation('studentRecord.section', 'id', $section->id)->orderBy('name')->paginate(10);
-            $viewData = ['students' => $students];
-        } else {
-            $viewData = [];
-        }
-
-        return view('livewire.list-exam-records-table', $viewData);
+        return view('livewire.list-exam-records-table');
     }
 }

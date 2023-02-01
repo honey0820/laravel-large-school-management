@@ -125,10 +125,6 @@ class StudentService
             throw new InvalidValueException('Section is not in class');
         }
 
-        if (auth()->user()->school->academic_year_id == null) {
-            throw new EmptyRecordsException('Academic Year not set');
-        }
-
         $student->studentRecord()->firstOrCreate([
             'user_id' => $student->id,
         ], [
@@ -179,7 +175,7 @@ class StudentService
     public function generateAdmissionNumber($schoolId = null)
     {
         $schoolInitials = (School::find($schoolId) ?? auth()->user()->school)->initials;
-        $schoolInitials != null && $schoolInitials .= '/';
+        $schoolInitials != null ?? $schoolInitials .= '/';
         $currentYear = date('y');
         do {
             $admissionNumber = "$schoolInitials"."$currentYear/".\mt_rand('100000', '999999');
@@ -303,11 +299,11 @@ class StudentService
         $currentAcademicYear = auth()->user()->school->academicYear;
 
         foreach ($students as $student) {
-            $student->allStudentRecords->load('academicYears')->academicYears()->syncWithoutDetaching([$currentAcademicYear->id => [
+            $student->studentRecord->load('academicYears')->academicYears()->syncWithoutDetaching([$currentAcademicYear->id => [
                 'my_class_id' => $promotion->old_class_id,
                 'section_id'  => $promotion->old_section_id,
             ]]);
-            $student->allStudentRecords()->update([
+            $student->studentRecord()->update([
                 'my_class_id' => $promotion->old_class_id,
                 'section_id'  => $promotion->old_section_id,
             ]);
@@ -354,7 +350,7 @@ class StudentService
      */
     public function resetGraduation(User $student)
     {
-        $student->graduatedStudentRecord()->update([
+        $student->studentRecord()->update([
             'is_graduated' => false,
         ]);
     }

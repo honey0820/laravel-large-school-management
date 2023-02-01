@@ -1,14 +1,25 @@
-@extends('layouts.app', ['breadcrumbs' => [
-    ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
-    ['href'=> route('exams.index'), 'text'=> 'Exams'],
-    ['href'=> route('exam-slots.index' ,$exam->id), 'text'=> 'Exam slots', 'active'],
-    ['href'=> route('exam-slots.create',$exam->id), 'text'=> 'Create', 'active'],
-]])
+@extends('adminlte::page')
 
-@section('title', __("Create Exam slots in {{$exam->name}}"))
+@section('title', __('Create Exam slots'))
 
-@section('page_heading',  __("Create Exam slots in {{$exam->name}}"))
 
-@section('content' )
+@section('content_header')
+    <h1 class="">
+        {{ __('Create Exam slots') }}
+    </h1>
+
+    @livewire('show-set-school')
+    
+    @livewire('breadcrumbs', ['paths' => [
+        ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
+        ['href'=> route('exams.index'), 'text'=> 'Exams'],
+        ['href'=> route('exam-slots.create',$exam->id), 'text'=> 'create', 'active'],
+    ]])
+
+@stop
+
+@section('content') 
     @livewire('create-exam-slot-form', ['exam' => $exam])
-@endsection
+
+    @livewire('display-status')
+@stop

@@ -33,10 +33,6 @@ class UserPolicy
      */
     public function view(User $user, User $model, $role)
     {
-        if ($user->school_id != $model->school_id) {
-            return false;
-        }
-
         if ($user->can("read $role") && $user->school_id == $model->school_id) {
             return true;
         }
@@ -70,10 +66,6 @@ class UserPolicy
      */
     public function update(User $user, User $model, $role)
     {
-        if ($user->school_id != $model->school_id) {
-            return false;
-        }
-
         if ($user->can("update $role") && $user->school_id == $model->school_id) {
             return true;
         }
@@ -89,10 +81,6 @@ class UserPolicy
      */
     public function delete(User $user, User $model, $role)
     {
-        if ($user->school_id != $model->school_id) {
-            return false;
-        }
-
         if ($user->can("delete $role") && $user->school_id == $model->school_id) {
             return true;
         }

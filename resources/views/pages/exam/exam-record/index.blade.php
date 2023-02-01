@@ -1,13 +1,25 @@
-@extends('layouts.app', ['breadcrumbs' => [
-    ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
-    ['href'=> route('exams.index'), 'text'=> 'Exams'],
-    ['href'=> route('exam-records.index'), 'text'=> 'Exam records', 'active'],
-]])
+@extends('adminlte::page')
 
-@section('title',  __('Exam records'))
+@section('title', __('Exam records'))
 
-@section('page_heading',   __('Exam records'))
 
-@section('content', )
+@section('content_header')
+    <h1 class="">
+        {{ __('Exam records') }}
+    </h1>
+
+    @livewire('show-set-school')
+    
+    @livewire('breadcrumbs', ['paths' => [
+        ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
+        ['href'=> route('exams.index'), 'text'=> 'Exams'],
+        ['href'=> route('exam-records.index'), 'text'=> 'Exam records', 'active'],
+    ]])
+
+@stop
+
+@section('content') 
     @livewire('list-exam-records-table')
-@endsection
+    
+    @livewire('display-status')
+@stop

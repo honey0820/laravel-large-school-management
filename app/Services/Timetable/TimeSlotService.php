@@ -15,8 +15,9 @@ class TimeSlotService
      *
      * @return void
      */
-    public function createTimeSlot($data)
+    public function createTimeSlot(Timetable $timetable, $data)
     {
+        $data['timetable_id'] = $timetable->id;
         TimetableTimeSlot::create([
             'start_time'   => $data['start_time'],
             'stop_time'    => $data['stop_time'],
@@ -40,11 +41,11 @@ class TimeSlotService
     public function createTimetableRecord(TimetableTimeSlot $timeSlot, $data)
     {
         //remove existing record
-        if ($timeSlot->weekdays->find($data['weekday_id']) || !isset($data['id']) || $data['id'] != null) {
+        if ($timeSlot->weekdays->find($data['weekday_id']) || $data['id'] == null) {
             $timeSlot->weekdays()->detach($data['weekday_id']);
         }
 
-        if (isset($data['id']) && $data['id'] != null) {
+        if ($data['id'] != null) {
             $timeSlot->weekdays()->attach($data['weekday_id'], ['timetable_time_slot_weekdayable_id' => $data['id'], 'timetable_time_slot_weekdayable_type' => $data['type']]);
         }
     }

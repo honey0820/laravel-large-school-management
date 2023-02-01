@@ -9,7 +9,6 @@ use Livewire\Component;
 class EditExamForm extends Component
 {
     public Exam $exam;
-    public $semesters;
 
     public function mount(SemesterService $semesterService)
     {

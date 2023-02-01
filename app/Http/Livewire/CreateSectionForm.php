@@ -9,6 +9,8 @@ class CreateSectionForm extends Component
 {
     public $myClasses;
 
+    //assign value of $myClasses to the value of $classService->getAllClasses()
+
     public function mount(MyClassService $classService)
     {
         $this->myClasses = $classService->getAllClasses();

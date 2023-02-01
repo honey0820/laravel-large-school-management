@@ -7,8 +7,6 @@ use Livewire\Component;
 
 class ListAcademicYearsTable extends Component
 {
-    public $academicYears;
-
     //mount method
     public function mount(AcademicYearService $academicYearService)
     {

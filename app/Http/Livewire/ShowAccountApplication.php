@@ -9,11 +9,6 @@ class ShowAccountApplication extends Component
 {
     public User $applicant;
 
-    public function mount()
-    {
-        $this->applicant->loadMissing('accountApplication.statuses');
-    }
-
     public function render()
     {
         return view('livewire.show-account-application');

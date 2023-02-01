@@ -44,7 +44,7 @@ class SemesterTest extends TestCase
     {
         $this->authorized_user(['read semester'])
             ->get('/dashboard/semesters/1')
-            ->status(404);
+            ->assertSuccessful();
     }
 
     //test unauthorized user can not create a semester

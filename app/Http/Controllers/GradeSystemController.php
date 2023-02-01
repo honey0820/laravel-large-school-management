@@ -61,8 +61,6 @@ class GradeSystemController extends Controller
      */
     public function show(GradeSystem $gradeSystem)
     {
-        abort(404);
-
         return view('pages.grade-system.show', compact('gradeSystem'));
     }
 
@@ -103,8 +101,8 @@ class GradeSystemController extends Controller
      */
     public function destroy(GradeSystem $gradeSystem)
     {
-        $this->gradeSystem->deleteGradeSystem($gradeSystem);
+        $this->gradeSystem->deleteGradeSystem($gradeSystem)->with('success', 'successfully deleted grade');
 
-        return back()->with('success', 'successfully deleted grade');
+        return back();
     }
 }

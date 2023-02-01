@@ -21,7 +21,6 @@ class ResultTabulation extends Component
     public $semester;
     public $tabulatedRecords;
     public $createdTabulation;
-    public $title;
 
     protected $listeners = ['print'];
 
@@ -62,8 +61,6 @@ class ResultTabulation extends Component
             $students = $myClass->students();
 
             $classGroup = $myClass->classGroup;
-
-            $titleFor = $myClass->name;
         } else {
             //get all subjects in section
             $subjects = $section->myClass->subjects;
@@ -72,17 +69,13 @@ class ResultTabulation extends Component
             $students = $section->students();
 
             $classGroup = $section->myClass->classGroup;
-
-            $titleFor = $section->name;
         }
 
-        if ($subjects->isEmpty()) {
+        if ($students->isEmpty()) {
             $this->createdTabulation = false;
 
             return;
         }
-
-        $this->title = "Exam Marks For $titleFor in whole semester ".auth()->user()->school->semester->name.' in academic year '.auth()->user()->school->academicYear->name;
 
         $examSlots = $this->semester->load('examSlots')->examSlots;
 

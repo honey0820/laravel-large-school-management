@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Subject extends Model
 {
@@ -37,9 +36,9 @@ class Subject extends Model
     /**
      * Get the subjects timetable records.
      *
-     * @return MorphOne
+     * @return void
      */
-    public function timetableRecord(): MorphOne
+    public function timetableRecord()
     {
         return $this->morphOne(TimetableRecord::class, 'timetable_time_slot_weekdayable');
     }

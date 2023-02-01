@@ -1,12 +1,24 @@
-@extends('layouts.app', ['breadcrumbs' => [
-    ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
-    ['href'=> route('timetables.index'), 'text'=> 'Timetables', 'active'],
-]])
+@extends('adminlte::page')
 
-@section('title',  __('Timetables'))
+@section('title', __('Timetables'))
 
-@section('page_heading',   __('Timetables'))
 
-@section('content', )
+@section('content_header')
+    <h1 class=""> 
+        {{ __('Timetables') }}
+    </h1>
+
+    @livewire('show-set-school')
+    
+    @livewire('breadcrumbs', ['paths' => [
+        ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
+        ['href'=> route('timetables.index'), 'text'=> 'Timetables', 'active'],
+    ]])
+
+@stop
+
+@section('content') 
     @livewire('list-timetables-table')
-@endsection
+    
+    @livewire('display-status')
+@stop

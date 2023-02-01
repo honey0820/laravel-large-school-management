@@ -1,12 +1,24 @@
-@extends('layouts.app', ['breadcrumbs' => [
-    ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
-    ['href'=> route('syllabi.index'), 'text'=> 'Syllabi', 'active'],
-]])
+@extends('adminlte::page')
 
-@section('title',  __('Syllabi'))
+@section('title', __('Syllabi'))
 
-@section('page_heading',  __('Syllabi'))
 
-@section('content', )
+@section('content_header')
+    <h1 class=" ">
+        {{ __('Syllabi') }}
+    </h1>
+
+    @livewire('show-set-school')
+    
+    @livewire('breadcrumbs', ['paths' => [
+        ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
+        ['href'=> route('syllabi.index'), 'text'=> 'Syllabi', 'active'],
+    ]])
+
+@stop
+
+@section('content') 
     @livewire('list-syllabi-table')
-@endsection
+    
+    @livewire('display-status')
+@stop

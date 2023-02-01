@@ -8,7 +8,6 @@ use Livewire\Component;
 class ShowPromotion extends Component
 {
     public $promotion;
-    public $students;
 
     public function mount(StudentService $studentService)
     {

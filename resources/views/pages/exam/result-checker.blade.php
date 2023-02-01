@@ -1,13 +1,25 @@
-@extends('layouts.app', ['breadcrumbs' => [
-    ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
-    ['href'=> route('exams.index'), 'text'=> 'exams'],
-    ['href'=> route('exams.result-checker'), 'text'=> 'Result Checker', 'active'],
-]])
+@extends('adminlte::page')
 
-@section('title',   __('Result Checker'))
+@section('title', __('Result Checker'))
 
-@section('page_heading', __('Result Checker'))
 
-@section('content', )
+@section('content_header')
+    <h1 class=" ">
+        {{ __('Result Checker') }}
+    </h1>
+
+    @livewire('show-set-school')
+    
+    @livewire('breadcrumbs', ['paths' => [
+        ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
+        ['href'=> route('exams.index'), 'text'=> 'exams'],
+        ['href'=> route('exams.result-checker'), 'text'=> 'Result Checker', 'active'],
+    ]])
+
+@stop
+
+@section('content') 
     @livewire('result-checker')
-@endsection
+
+    @livewire('display-status')
+@stop

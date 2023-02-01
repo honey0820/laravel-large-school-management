@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class EditUserFields extends Component
 {
-    public $role = 'User';
+    public $role = 'user';
 
     public User $user;
 

@@ -5,17 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StudentGraduateRequest;
 use App\Models\User;
 use App\Services\Student\StudentService;
-use App\Services\User\UserService;
 
 class GraduationController extends Controller
 {
-    public $userService;
-    public $studentService;
+    public $Service;
 
-    public function __construct(StudentService $studentService, UserService $userService)
+    public function __construct(StudentService $studentService)
     {
         $this->studentService = $studentService;
-        $this->userService = $userService;
     }
 
     /**
@@ -78,7 +75,7 @@ class GraduationController extends Controller
         if (!auth()->user()->can('reset graduation')) {
             return abort(403, 'Unauthorized action.');
         }
-        $this->userService->verifyUserIsOfRoleElseNotFound($student, 'student');
+        $this->studentService->user->verifyUserIsOfRoleElseNotFound($student, 'student');
         $this->studentService->resetGraduation($student);
 
         return back()->with('success', 'Graduation Reset Successfully');

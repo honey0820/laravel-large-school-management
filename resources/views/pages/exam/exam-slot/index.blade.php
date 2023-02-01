@@ -1,13 +1,25 @@
-@extends('layouts.app', ['breadcrumbs' => [
-    ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
-    ['href'=> route('exams.index'), 'text'=> 'Exams'],
-    ['href'=> route('exam-slots.index' ,$exam->id), 'text'=> 'Exam slots', 'active'],
-]])
+@extends('adminlte::page')
 
-@section('title',  __("Exam Slots In $exam->name"))
+@section('title', __('Exam slots'))
 
-@section('page_heading',   __("Exam Slots In $exam->name"))
 
-@section('content', )
+@section('content_header')
+    <h1 class=""> 
+        {{ __('Exam slots') }}
+    </h1>
+
+    @livewire('show-set-school')
+    
+    @livewire('breadcrumbs', ['paths' => [
+        ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
+        ['href'=> route('exams.index'), 'text'=> 'Exams'],
+        ['href'=> route('exam-slots.index' ,$exam->id), 'text'=> 'Exam slots', 'active'],
+    ]])
+
+@stop
+
+@section('content') 
     @livewire('list-exam-slots-table', ['exam'=> $exam])
-@endsection
+    
+    @livewire('display-status')
+@stop

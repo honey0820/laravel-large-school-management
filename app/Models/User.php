@@ -2,10 +2,8 @@
 
 namespace App\Models;
 
-use App\Traits\InSchool;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -24,7 +22,6 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasRoles;
-    use InSchool;
 
     /**
      * The attributes that are mass assignable.
@@ -78,44 +75,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'profile_photo_url',
     ];
 
-    public function scopeStudents($query)
-    {
-        return $query->role('student');
-    }
-
-    /**
-     * Active applicants.
-     *
-     * @param Builder $query
-     *
-     * @return void
-     */
-    public function scopeApplicants($query)
-    {
-        return $query->role('applicant')->whereHas('accountApplication', function (Builder $query) {
-            $query->otherCurrentStatus('rejected');
-        });
-    }
-
-    /**
-     * Active applicants.
-     *
-     * @param Builder $query
-     *
-     * @return void
-     */
-    public function scopeRejectedApplicants($query)
-    {
-        return $query->role('applicant')->whereHas('accountApplication', function (Builder $query) {
-            $query->currentStatus('rejected');
-        });
-    }
-
-    public function scopeActiveStudents($query)
-    {
-        return $query->whereRelation('studentRecord', 'is_graduated', 0);
-    }
-
     /**
      * Get the school that owns the User.
      *
@@ -134,26 +93,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function studentRecord()
     {
         return $this->hasOne(StudentRecord::class);
-    }
-
-    /**
-     * Get the studentRecord of graduation associated with the User.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function graduatedStudentRecord()
-    {
-        return $this->hasOne(StudentRecord::class)->withoutGlobalScopes()->where('is_Graduated', true);
-    }
-
-    /**
-     * Get the studentRecord of graduation associated with the User.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function allStudentRecords()
-    {
-        return $this->hasOne(StudentRecord::class)->withoutGlobalScopes();
     }
 
     /**
@@ -202,22 +141,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return explode(' ', $this->name)[0];
     }
 
-    //get first name
-    public function getFirstNameAttribute()
-    {
-        return $this->firstName();
-    }
-
     //get last name
     public function lastName()
     {
         return explode(' ', $this->name)[1];
-    }
-
-    //get last name
-    public function getLastNameAttribute()
-    {
-        return $this->lastName();
     }
 
     //get other names
@@ -226,12 +153,6 @@ class User extends Authenticatable implements MustVerifyEmail
         $names = array_diff_key(explode(' ', $this->name), array_flip([0, 1]));
 
         return implode(' ', $names);
-    }
-
-    //get other names
-    public function getOtherNamesAttribute()
-    {
-        return $this->otherNames();
     }
 
     public function defaultProfilePhotoUrl()
@@ -251,7 +172,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getBirthdayAttribute($value)
     {
-        return Carbon::parse($value)->format('Y-m-d');
+        return Carbon::parse($value)->format('Y/m/d');
     }
 
     /**
