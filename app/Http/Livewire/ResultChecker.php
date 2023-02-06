@@ -2,11 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\User;
-use Livewire\Component;
 use App\Models\Semester;
-use App\Models\AcademicYear;
+use App\Models\User;
 use App\Services\MyClass\MyClassService;
+use Livewire\Component;
 
 class ResultChecker extends Component
 {
@@ -102,10 +101,8 @@ class ResultChecker extends Component
         $this->students->count() ? $this->student = $this->students[0]->id : $this->student = null;
     }
 
-    public function checkResult(AcademicYear $academicYear, $semester, User $student)
+    public function checkResult(Semester $semester, User $student)
     {
-        $semester = Semester::find($semester);
-
         // make sure user student isn't another role
         if (!$student->hasRole('student')) {
             abort(404, 'Student not found.');
@@ -114,20 +111,15 @@ class ResultChecker extends Component
         $this->studentName = $student->name;
         // fetch all exams, subjects and exam records for user in semester
 
-        if($semester != null && $semester->exists()){
-            $this->exams = $semester->exams()->where('publish_result', true)->get()->load('examSlots');
-            //fetch all students exam records in semester
-            $this->examRecords = app("App\Services\Exam\ExamRecordService")->getAllUserExamRecordInSemester($semester, $student->id);
-        }else{
-            $this->exams = $academicYear->exams()->where('publish_result', true)->get()->load('examSlots');
-            $this->examRecords = app("App\Services\Exam\ExamRecordService")->getAllUserExamRecordInAcademicYear($academicYear, $student->id);
-        }
-
+        $this->exams = $semester->exams()->where('publish_result', true)->get()->load('examSlots');
         if ($this->exams->isEmpty()) {
             $this->status = 'There are no exams with published results for now';
 
             return $this->preparedResults = false;
         }
+
+        //fetch all students exam records in semester
+        $this->examRecords = app("App\Services\Exam\ExamRecordService")->getAllUserExamRecordInSemester($semester, $student->id);
 
         $academicYearsWithStudentRecords = $student->allStudentRecords->academicYears()->where('academic_year_id', $this->academicYear)->first();
         if (is_null($academicYearsWithStudentRecords)) {

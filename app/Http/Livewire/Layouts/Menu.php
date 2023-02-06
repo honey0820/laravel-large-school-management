@@ -401,14 +401,8 @@ class Menu extends Component
                     ],
                     [
                         'type'  => 'menu-item',
-                        'text'  => 'Semester Result Sheet',
-                        'route' => 'exams.semester-result-tabulation',
-                        'can'   => 'read exam',
-                    ],
-                    [
-                        'type'  => 'menu-item',
-                        'text'  => 'Academic Year Result Sheet',
-                        'route' => 'exams.academic-year-result-tabulation',
+                        'text'  => 'Result tabulation sheet',
+                        'route' => 'exams.result-tabulation',
                         'can'   => 'read exam',
                     ],
                     [

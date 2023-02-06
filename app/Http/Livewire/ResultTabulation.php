@@ -10,7 +10,7 @@ use App\Traits\MarkTabulationTrait;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Component;
 
-class SemesterResultTabulation extends Component
+class ResultTabulation extends Component
 {
     use MarkTabulationTrait;
 
@@ -106,6 +106,6 @@ class SemesterResultTabulation extends Component
 
     public function render()
     {
-        return view('livewire.semester-result-tabulation');
+        return view('livewire.result-tabulation');
     }
 }

@@ -6,7 +6,6 @@ use App\Models\ClassGroup;
 use App\Models\ExamRecord;
 use App\Models\GradeSystem;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Collection as SupportCollection;
 
 /**
  * Mark tabulation traits.
@@ -37,7 +36,7 @@ trait MarkTabulationTrait
      *
      * @return Collection
      */
-    public function tabulateMarks(ClassGroup $classGroup, Collection|SupportCollection $subjects, Collection|SupportCollection $students, Collection|SupportCollection $examSlots)
+    public function tabulateMarks(ClassGroup $classGroup, Collection $subjects, Collection $students, Collection $examSlots)
     {
         //create tabulation container variable
         $tabulatedRecords = [];
