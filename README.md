@@ -46,7 +46,7 @@ cp  npm install
 ```
 * Build NPM assets
 ```shell
-  npm run build
+cp  npm run build
 ```
 
 Note if you do not have node, you can do this in your local environment and using an ftp program upload the publi/build folder and manifest.json folder to your server
