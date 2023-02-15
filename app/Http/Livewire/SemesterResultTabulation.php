@@ -15,19 +15,12 @@ class SemesterResultTabulation extends Component
     use MarkTabulationTrait;
 
     public $section;
-
     public $sections;
-
     public $classes;
-
     public $class;
-
     public $semester;
-
     public $tabulatedRecords;
-
     public $createdTabulation;
-
     public $title;
 
     protected $listeners = ['print'];
@@ -39,7 +32,7 @@ class SemesterResultTabulation extends Component
         $this->classes = $myClassService->getAllClasses();
 
         //sets subjects etc if class isn't empty
-        if (! $this->classes->isEmpty()) {
+        if (!$this->classes->isEmpty()) {
             $this->class = $this->classes[0]->id;
             $this->sections = $this->classes[0]->sections;
             $this->section = $this->sections[0]->id;

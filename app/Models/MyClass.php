@@ -73,6 +73,8 @@ class MyClass extends Model
 
     /**
      * Get all of the syllabi for the MyClass.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
     public function syllabi(): HasManyThrough
     {
@@ -81,6 +83,8 @@ class MyClass extends Model
 
     /**
      * Get all of the timetables for the MyClass.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function timetables(): HasMany
     {

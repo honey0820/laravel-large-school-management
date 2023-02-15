@@ -9,7 +9,6 @@ use Spatie\Permission\Models\Role;
 class RegistrationForm extends Component
 {
     public $roles;
-
     public $schools;
 
     public function mount(SchoolService $schoolService)

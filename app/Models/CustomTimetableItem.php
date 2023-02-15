@@ -15,6 +15,8 @@ class CustomTimetableItem extends Model
 
     /**
      * Get the school that owns the CustomTimetableItem.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function school(): BelongsTo
     {
@@ -23,6 +25,8 @@ class CustomTimetableItem extends Model
 
     /**
      * Get the subjects timetable records.
+     *
+     * @return MorphOne
      */
     public function timetableRecord(): MorphOne
     {

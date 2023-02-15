@@ -9,9 +9,7 @@ use Livewire\Component;
 class EditGradeSystemForm extends Component
 {
     public GradeSystem $grade;
-
     public $classGroups;
-
     public $classGroup;
 
     public function mount(MyClassService $myClassService)

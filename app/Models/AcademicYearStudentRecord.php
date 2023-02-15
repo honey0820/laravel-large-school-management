@@ -13,11 +13,12 @@ class AcademicYearStudentRecord extends Pivot
      * @var bool
      */
     public $incrementing = true;
-
     protected $fillable = ['my_class_id', 'section_id'];
 
     /**
      * Get the studentRecord that owns the AcademicYearStudentRecord.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function studentRecord(): BelongsTo
     {
@@ -26,6 +27,8 @@ class AcademicYearStudentRecord extends Pivot
 
     /**
      * Get the class that owns the AcademicYearStudentRecord.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function class(): BelongsTo
     {
@@ -34,6 +37,8 @@ class AcademicYearStudentRecord extends Pivot
 
     /**
      * Get the section that owns the AcademicYearStudentRecord.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function section(): BelongsTo
     {

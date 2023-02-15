@@ -17,6 +17,8 @@ class AccountApplication extends Model
 
     /**
      * Get the user that owns the AccountApplication.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user(): BelongsTo
     {
@@ -25,6 +27,8 @@ class AccountApplication extends Model
 
     /**
      * Get the role that owns the AccountApplication.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function role(): BelongsTo
     {

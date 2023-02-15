@@ -24,6 +24,8 @@ class ExamSlot extends Model
 
     /**
      * Get all of the examRecords for the ExamSlot.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function examRecords(): HasMany
     {

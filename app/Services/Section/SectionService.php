@@ -10,6 +10,8 @@ class SectionService
 {
     /**
      * School service instance.
+     *
+     * @var SchoolService
      */
     public SchoolService $school;
 
@@ -37,6 +39,7 @@ class SectionService
     /**
      * Get a section by Id.
      *
+     * @param int $id
      *
      * @return void
      */
@@ -48,7 +51,8 @@ class SectionService
     /**
      * Create section.
      *
-     * @param  mixed  $records
+     * @param mixed $records
+     *
      * @return void
      */
     public function createSection($records)
@@ -61,7 +65,9 @@ class SectionService
     /**
      * Update section.
      *
-     * @param  mixed  $record
+     * @param Section $section
+     * @param mixed   $record
+     *
      * @return void
      */
     public function updateSection(Section $section, $record)
@@ -75,6 +81,7 @@ class SectionService
     /**
      * Delete section.
      *
+     * @param Section $section
      *
      * @return void
      */

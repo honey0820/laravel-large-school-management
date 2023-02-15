@@ -10,7 +10,6 @@ use App\Services\User\UserService;
 class GraduationController extends Controller
 {
     public $userService;
-
     public $studentService;
 
     public function __construct(StudentService $studentService, UserService $userService)
@@ -26,7 +25,7 @@ class GraduationController extends Controller
      */
     public function index()
     {
-        if (! auth()->user()->can('view graduations')) {
+        if (!auth()->user()->can('view graduations')) {
             return abort(403, 'Unauthorized action.');
         }
 
@@ -36,13 +35,13 @@ class GraduationController extends Controller
     /**
      * Graduate view.
      *
-     * @return \Illuminate\Http\Response
-     *
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @return \Illuminate\Http\Response
      */
     public function graduateView()
     {
-        if (! auth()->user()->can('graduate student')) {
+        if (!auth()->user()->can('graduate student')) {
             return abort(403, 'Unauthorized action.');
         }
 
@@ -52,12 +51,13 @@ class GraduationController extends Controller
     /**
      * Graduate student.
      *
+     * @param StudentGraduateRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function graduate(StudentGraduateRequest $request)
     {
-        if (! auth()->user()->can('graduate student')) {
+        if (!auth()->user()->can('graduate student')) {
             return abort(403, 'Unauthorized action.');
         }
         $data = collect($request->except('_token'));
@@ -69,12 +69,13 @@ class GraduationController extends Controller
     /**
      * Reset user graduation.
      *
+     * @param User $student
      *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function resetGraduation(User $student)
     {
-        if (! auth()->user()->can('reset graduation')) {
+        if (!auth()->user()->can('reset graduation')) {
             return abort(403, 'Unauthorized action.');
         }
         $this->userService->verifyUserIsOfRoleElseNotFound($student, 'student');

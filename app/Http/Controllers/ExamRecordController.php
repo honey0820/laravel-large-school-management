@@ -6,9 +6,6 @@ use App\Http\Requests\StoreExamRecordRequest;
 use App\Http\Requests\UpdateExamRecordRequest;
 use App\Models\ExamRecord;
 use App\Services\Exam\ExamRecordService;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
-use Illuminate\View\View;
 
 class ExamRecordController extends Controller
 {
@@ -23,24 +20,32 @@ class ExamRecordController extends Controller
 
     /**
      * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function index(): View
+    public function index()
     {
         return view('pages.exam.exam-record.index');
     }
 
     /**
      * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function create(): View
+    public function create()
     {
         return view('pages.exam.exam-record.create');
     }
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @param \App\Http\Requests\StoreExamRecordRequest $request
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function store(StoreExamRecordRequest $request): RedirectResponse
+    public function store(StoreExamRecordRequest $request)
     {
         $data = $request->except('_token');
 
@@ -51,33 +56,50 @@ class ExamRecordController extends Controller
 
     /**
      * Display the specified resource.
+     *
+     * @param \App\Models\ExamRecord $examRecord
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function show(ExamRecord $examRecord): Response
+    public function show(ExamRecord $examRecord)
     {
-        abort(404);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * @param \App\Models\ExamRecord $examRecord
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function edit(ExamRecord $examRecord): Response
+    public function edit(ExamRecord $examRecord)
     {
-        abort(404);
+        //
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param \App\Http\Requests\UpdateExamRecordRequest $request
+     * @param \App\Models\ExamRecord                     $examRecord
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function update(UpdateExamRecordRequest $request, ExamRecord $examRecord): RedirectResponse
+    public function update(UpdateExamRecordRequest $request, ExamRecord $examRecord)
     {
-        abort(404);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param \App\Models\ExamRecord $examRecord
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(ExamRecord $examRecord): Response
+    public function destroy(ExamRecord $examRecord)
     {
-        abort(404);
+        //
     }
 }

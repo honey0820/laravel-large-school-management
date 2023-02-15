@@ -7,19 +7,12 @@ use Illuminate\View\Component;
 class InfoBox extends Component
 {
     public $icon;
-
     public $title;
-
     public $text;
-
     public $url;
-
     public $urlText;
-
     public $colour;
-
     public $class;
-
     public $textColour;
 
     /**

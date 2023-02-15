@@ -6,13 +6,13 @@ use App\Http\Requests\ClassGroupStoreRequest;
 use App\Http\Requests\UpdateClassGroupRequest;
 use App\Models\ClassGroup;
 use App\Services\MyClass\MyClassService;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 
 class ClassGroupController extends Controller
 {
     /**
      * Class service class instance.
+     *
+     * @var MyClassService
      */
     public MyClassService $myClassService;
 
@@ -25,24 +25,32 @@ class ClassGroupController extends Controller
 
     /**
      * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function index(): View
+    public function index()
     {
         return view('pages.class-group.index');
     }
 
     /**
      * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function create(): View
+    public function create()
     {
         return view('pages.class-group.create');
     }
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @param ClassGroupStoreRequest $request
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function store(ClassGroupStoreRequest $request): RedirectResponse
+    public function store(ClassGroupStoreRequest $request)
     {
         $data = $request->except('_token');
         $this->myClassService->createClassGroup($data);
@@ -52,8 +60,12 @@ class ClassGroupController extends Controller
 
     /**
      * Display the specified resource.
+     *
+     * @param ClassGroup $classGroup
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function show(ClassGroup $classGroup): View
+    public function show(ClassGroup $classGroup)
     {
         $data['classGroup'] = $classGroup;
 
@@ -62,8 +74,12 @@ class ClassGroupController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * @param ClassGroup $classGroup
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function edit(ClassGroup $classGroup): View
+    public function edit(ClassGroup $classGroup)
     {
         $data['classGroup'] = $classGroup;
 
@@ -72,8 +88,13 @@ class ClassGroupController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param UpdateClassGroupRequest $request
+     * @param ClassGroup              $classGroup
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function update(UpdateClassGroupRequest $request, ClassGroup $classGroup): RedirectResponse
+    public function update(UpdateClassGroupRequest $request, ClassGroup $classGroup)
     {
         $data = $request->except('_token', '_method', 'school_id');
         $this->myClassService->updateClassGroup($classGroup, $data);
@@ -83,8 +104,12 @@ class ClassGroupController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param ClassGroup $classGroup
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(ClassGroup $classGroup): RedirectResponse
+    public function destroy(ClassGroup $classGroup)
     {
         $this->myClassService->deleteClassGroup($classGroup);
 

@@ -81,6 +81,8 @@ class StudentRecord extends Model
 
     /**
      * The academicYears that belong to the StudentRecord.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function academicYears(): BelongsToMany
     {

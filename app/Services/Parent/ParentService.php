@@ -12,6 +12,8 @@ class ParentService
 {
     /**
      * User service variable.
+     *
+     * @var \App\Services\User\UserService
      */
     public UserService $user;
 
@@ -33,7 +35,8 @@ class ParentService
     /**
      * Create a new parent.
      *
-     * @param  collection  $record
+     * @param collection $record
+     *
      * @return User
      */
     public function createParent($record)
@@ -41,7 +44,7 @@ class ParentService
         $parent = DB::transaction(function () use ($record) {
             $parent = $this->user->createUser($record);
             $parent->assignRole('parent');
-            $parent->parentRecord()->create(['user_id' => $parent->id]);
+            $parent->parentRecord()->create(['user_id'=> $parent->id]);
 
             return $parent;
         });
@@ -52,7 +55,9 @@ class ParentService
     /**
      * Update a parent.
      *
-     * @param  array|object|collection  $records
+     * @param User                    $parent
+     * @param array|object|collection $records
+     *
      * @return User
      */
     public function updateParent(User $parent, $records)
@@ -65,6 +70,7 @@ class ParentService
     /**
      * Delete parent record.
      *
+     * @param User $parent
      *
      * @return void
      */
@@ -74,8 +80,11 @@ class ParentService
     }
 
     /**
-     * Print a uset profiel.
+     * Print a user profile.
      *
+     * @param string $name
+     * @param string $view
+     * @param array  $data
      *
      * @return mixed
      */
@@ -87,15 +96,16 @@ class ParentService
     /**
      * Add student as child of parent or remove student from parent.
      *
-     * @param  App\Models\Users  $parent
-     * @return void
+     * @param App\Models\Users $parent
+     * @param int              $student
+     * @param bool             $assign
      *
-     * @throws InvalidUserException
+     * @return void
      */
     public function assignStudentToParent(User $parent, int $student, bool $assign = true)
     {
         $student = $this->user->getUserById($student);
-        if (! $this->user->verifyRole($student->id, 'student')) {
+        if (!$this->user->verifyRole($student->id, 'student')) {
             throw new InvalidUserException('User is not a student', 1);
 
             return;

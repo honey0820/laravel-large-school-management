@@ -6,53 +6,62 @@ use App\Http\Requests\TimetableStoreRequest;
 use App\Http\Requests\TimetableUpdateRequest;
 use App\Models\Timetable;
 use App\Services\Timetable\TimetableService;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
-use Illuminate\View\View;
 
 class TimetableController extends Controller
 {
-    public $timetableService;
+    public $timetable;
 
-    public function __construct(TimetableService $timetableService)
+    public function __construct(TimetableService $timetable)
     {
-        $this->timetableService = $timetableService;
+        $this->timetable = $timetable;
         $this->authorizeResource(Timetable::class, 'timetable');
     }
 
     /**
      * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function index(): View
+    public function index()
     {
         return view('pages.timetable.index');
     }
 
     /**
      * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function create(): View
+    public function create()
     {
         return view('pages.timetable.create');
     }
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @param TimetableStoreRequest $request
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function store(TimetableStoreRequest $request): RedirectResponse
+    public function store(TimetableStoreRequest $request)
     {
         $data = $request->except('_token');
         $data['semester_id'] = auth()->user()->school->semester_id;
 
-        $this->timetableService->createTimetable($data);
+        $this->timetable->createTimetable($data);
 
         return back()->with('success', 'Timetable created successfully');
     }
 
     /**
      * Display the specified resource.
+     *
+     * @param \App\Models\Timetable $timetable
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function show(Timetable $timetable): View
+    public function show(Timetable $timetable)
     {
         return view('pages.timetable.show', compact('timetable'));
     }
@@ -60,46 +69,57 @@ class TimetableController extends Controller
     /**
      * Print timetable.
      */
-    public function print(Timetable $timetable): Response
+    public function print(Timetable $timetable)
     {
         $data['timetable'] = $timetable;
 
-        return $this->timetableService->printTimetable($data['timetable']->name, 'pages.timetable.print', $data);
+        return $this->timetable->printTimetable($data['timetable']->name, 'pages.timetable.print', $data);
     }
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * @param \App\Models\Timetable $timetable
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function edit(Timetable $timetable): View
+    public function edit(Timetable $timetable)
     {
         return view('pages.timetable.edit', compact('timetable'));
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param TimetableUpdateRequest $request
+     * @param \App\Models\Timetable  $timetable
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function update(TimetableUpdateRequest $request, Timetable $timetable): RedirectResponse
+    public function update(TimetableUpdateRequest $request, Timetable $timetable)
     {
         $data = $request->except('_token'.'_method');
-        $this->timetableService->updateTimetable($timetable, $data);
+        $this->timetable->updateTimetable($timetable, $data);
 
         return back()->with('success', 'Timetable updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param \App\Models\Timetable $timetable
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(Timetable $timetable): RedirectResponse
+    public function destroy(Timetable $timetable)
     {
-        $this->timetableService->deleteTimetable($timetable);
+        $this->timetable->deleteTimetable($timetable);
 
         return back()->with('success', 'Timetable deleted successfully');
     }
 
-    /**
-     * Manage Timetable.
-     */
-    public function manage(Timetable $timetable): View
+    //manage timetable
+    public function manage(Timetable $timetable)
     {
         $this->authorize('update', $timetable);
 

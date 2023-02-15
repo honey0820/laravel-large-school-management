@@ -7,56 +7,68 @@ use App\Http\Requests\SchoolStoreRequest;
 use App\Http\Requests\SchoolUpdateRequest;
 use App\Models\School;
 use App\Services\School\SchoolService;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 
 class SchoolController extends Controller
 {
     /**
      * @var SchoolService
      */
-    public $schoolService;
+    public $school;
 
     /**
      * SchoolController constructor.
+     *
+     * @param SchoolService $school
      */
-    public function __construct(SchoolService $schoolService)
+    public function __construct(SchoolService $school)
     {
-        $this->schoolService = $schoolService;
+        $this->school = $school;
         $this->authorizeResource(School::class, 'school');
     }
 
     /**
      * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function index(): View
+    public function index()
     {
         return view('pages.school.index');
     }
 
     /**
      * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function create(): View
+    public function create()
     {
         return view('pages.school.create');
     }
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @param SchoolStoreRequest $request
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function store(SchoolStoreRequest $request): RedirectResponse
+    public function store(SchoolStoreRequest $request)
     {
         $data = $request->except('_token');
-        $this->schoolService->createSchool($data);
+        $this->school->createSchool($data);
 
         return back()->with('success', __('School created successfully'));
     }
 
     /**
      * Display the specified resource.
+     *
+     * @param School $school
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function show(School $school): View
+    public function show(School $school)
     {
         $data['school'] = $school;
 
@@ -65,8 +77,12 @@ class SchoolController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * @param School $school
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function edit(School $school): View
+    public function edit(School $school)
     {
         $data['school'] = $school;
 
@@ -75,44 +91,59 @@ class SchoolController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param SchoolUpdateRequest $request
+     * @param School              $school
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function update(SchoolUpdateRequest $request, School $school): RedirectResponse
+    public function update(SchoolUpdateRequest $request, School $school)
     {
         $data = $request->except('_token', '_method');
-        $this->schoolService->updateSchool($school, $data);
+        $this->school->updateSchool($school, $data);
 
         return back()->with('success', __('School updated successfully'));
     }
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param School $school
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(School $school): RedirectResponse
+    public function destroy(School $school)
     {
-        $this->schoolService->deleteSchool($school);
+        $this->school->deleteSchool($school);
 
         return back()->with('success', __('School deleted successfully'));
     }
 
     /**
      * Get settings for authenticated user's school.
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function settings(): RedirectResponse
+    public function settings()
     {
         return redirect()->route('schools.edit', ['school' => auth()->user()->school_id]);
     }
 
     /**
      * Set the school.
+     *
+     * @param SchoolSetRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function setSchool(SchoolSetRequest $request): RedirectResponse
+    public function setSchool(SchoolSetRequest $request)
     {
         $this->authorize('setSchool', School::class);
 
         $schoolId = $request->input('school_id');
         $school = School::findOrFail($schoolId);
 
-        $this->schoolService->setSchool($school);
+        $this->school->setSchool($school);
 
         return back()->with('success', __('School set successfully'));
     }

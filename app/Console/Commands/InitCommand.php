@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\DB;
 class InitCommand extends Command
 {
     use EnvEditorTrait;
-
     /**
      * The name and signature of the console command.
      *
@@ -27,6 +26,8 @@ class InitCommand extends Command
     /**
      * No of attempts to be made to connect to the
      * Database, after which installation would stop.
+     *
+     * @var int
      */
     public int $maxDbConnectAttempts = 5;
 
@@ -40,8 +41,8 @@ class InitCommand extends Command
     public function handle()
     {
         $this->line("
-        
-        .----------------. .----------------. .----------------. .----------------. .----------------. 
+
+        .----------------. .----------------. .----------------. .----------------. .----------------.
         | .--------------. | .--------------. | .--------------. | .--------------. | .--------------. |
         | |    _______   | | |  ___  ____   | | | _____  _____ | | | _____  _____ | | |   _____      | |
         | |   /  ___  |  | | | |_  ||_  _|  | | ||_   _||_   _|| | ||_   _||_   _|| | |  |_   _|     | |
@@ -51,7 +52,7 @@ class InitCommand extends Command
         | |  |_______.'  | | | |____||____| | | |    `.__.'    | | |    `.__.'    | | |  |________|  | |
         | |              | | |              | | |              | | |              | | |              | |
         | '--------------' | '--------------' | '--------------' | '--------------' | '--------------' |
-        '----------------' '----------------' '----------------' '----------------' '----------------' 
+        '----------------' '----------------' '----------------' '----------------' '----------------'
         ");
         $this->info(
             'The installation would now begin.'
@@ -89,7 +90,7 @@ class InitCommand extends Command
     {
         $this->newLine();
         $this->line('Generating .env file.....');
-        if (! file_exists(base_path('.env'))) {
+        if (!file_exists(base_path('.env'))) {
             $this->components->task('Copying .env file', static function (): void {
                 copy(base_path('.env.example'), base_path('.env'));
             });
@@ -104,7 +105,7 @@ class InitCommand extends Command
         $this->line('Generating app encryption key');
 
         $key = $this->laravel['config']['app.key'];
-        if (! $key) {
+        if (!$key) {
             $this->call('key:generate');
         } else {
             $this->info('Encryption key exists already -- skipping');
@@ -175,7 +176,7 @@ class InitCommand extends Command
                 //exit if connection could be made
                 break;
             } catch (\Throwable $th) {
-                $this->error("Couldn't connect with credentials. You would be prompted to enter/re-enter database credentails and connection would be retried. Not sure what these are?, you can reach out to your host's support or ask for help on github");
+                $this->error("Couldn't connect with credentials. You would be prompted to enter/re-enter database credentials and connection would be retried. Not sure what these are?, you can reach out to your host's support or ask for help on github");
                 $this->newLine();
                 $this->line('Database details');
                 $this->info('Attributes in parentheses are the default');
@@ -202,7 +203,7 @@ class InitCommand extends Command
 
         //if connection could not be made, max attempts were reached but could not connect to db
         if (false == $successfulConnection) {
-            $this->error('Max db attempts exceecded please retry installation'.PHP_EOL);
+            $this->error('Max db attempts exceeded please retry installation'.PHP_EOL);
 
             throw new \Exception('Max db connections reached.');
         }
@@ -229,15 +230,15 @@ class InitCommand extends Command
         $mailReplyName = $this->ask('Mail Reply Name', getenv('MAIL_REPLY_NAME'));
 
         $mailCredentials = [
-            'MAIL_MAILER' => $mailMailer,
-            'MAIL_HOST' => $mailHost,
-            'MAIL_PORT' => $mailPort,
-            'MAIL_USERNAME' => $mailUsername,
-            'MAIL_PASSWORD' => $mailPassword,
-            'MAIL_FROM_ADDRESS' => $mailFromAddress,
-            'MAIL_FROM_NAME' => $mailFromName,
-            'MAIL_REPLY_ADDRESS' => $mailReplyAddress,
-            'MAIL_REPLY_NAME' => $mailReplyName,
+            'MAIL_MAILER'          => $mailMailer,
+            'MAIL_HOST'            => $mailHost,
+            'MAIL_PORT'            => $mailPort,
+            'MAIL_USERNAME'        => $mailUsername,
+            'MAIL_PASSWORD'        => $mailPassword,
+            'MAIL_FROM_ADDRESS'    => $mailFromAddress,
+            'MAIL_FROM_NAME'       => $mailFromName,
+            'MAIL_REPLY_ADDRESS'   => $mailReplyAddress,
+            'MAIL_REPLY_NAME'      => $mailReplyName,
         ];
 
         $this->setEnvironmentValue($mailCredentials);

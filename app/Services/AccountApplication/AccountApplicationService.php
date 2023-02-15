@@ -13,11 +13,15 @@ class AccountApplicationService
 {
     /**
      * User service instance.
+     *
+     * @var UserService
      */
     public UserService $userService;
 
     /**
      * Student service instance.
+     *
+     * @var StudentService
      */
     public StudentService $studentService;
 
@@ -64,6 +68,8 @@ class AccountApplicationService
     /**
      * Create application record.
      *
+     * @param int $userId
+     * @param int $roleId
      *
      * @return AccountApplication
      */
@@ -78,8 +84,9 @@ class AccountApplicationService
     /**
      * Update account application.
      *
-     * @param  User  $user
-     * @param  object  $record
+     * @param User   $user
+     * @param object $record
+     *
      * @return void
      */
     public function updateAccountApplication(User $applicant, object|array $record)
@@ -95,8 +102,10 @@ class AccountApplicationService
     }
 
     /**
-     * Change application status or process accountcreation.
+     * Change application status or process account creation.
      *
+     * @param User $applicant
+     * @param $record
      *
      * @return void
      */
@@ -106,7 +115,8 @@ class AccountApplicationService
             $applicant->accountApplication->setStatus($record['status'], $record['reason'] ?? null);
 
             if ($applicant->accountApplication->status == 'approved') {
-                //create assosciated user records
+
+                //create associated user records
                 switch ($applicant->accountApplication->role->name) {
                     case 'student':
                         $this->studentService->createStudentRecord($applicant, $record);
@@ -131,6 +141,7 @@ class AccountApplicationService
     /**
      * Delete user and application.
      *
+     * @param User $applicant
      *
      * @return void
      */

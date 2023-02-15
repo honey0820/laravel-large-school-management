@@ -8,9 +8,7 @@ use Livewire\Component;
 class ListTimetablesTable extends Component
 {
     protected $queryString = ['class'];
-
     public $class;
-
     public $classes;
 
     public function mount(MyClassService $myClassService)

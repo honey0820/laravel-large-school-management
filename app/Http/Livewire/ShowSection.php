@@ -7,7 +7,6 @@ use Livewire\Component;
 class ShowSection extends Component
 {
     public $section;
-
     public $students;
 
     public function mount()

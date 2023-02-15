@@ -11,17 +11,15 @@ use Livewire\Component;
 class AssignTeacherToSubjects extends Component
 {
     public $teachers;
-
     public $classes;
-
     public ?int $class;
-
     public $subjects;
-
     public $teacher;
-
     /**
      * State variable for teacher.
+     *
+     *
+     * @var User
      */
     public User $teacherState;
 

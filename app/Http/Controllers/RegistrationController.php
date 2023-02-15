@@ -11,11 +11,15 @@ class RegistrationController extends Controller
 {
     /**
      * Account application service instance.
+     *
+     * @var AccountApplicationService
      */
     public AccountApplicationService $accountApplicationService;
 
     /**
      * User service instance.
+     *
+     * @var UserService
      */
     public UserService $userService;
 
@@ -48,6 +52,6 @@ class RegistrationController extends Controller
         //dispatch event
         AccountStatusChanged::dispatch($user, $status, $reason);
 
-        return back()->with('success', 'Registration complete, you would recieve an email to verify your account');
+        return back()->with('success', 'Registration complete, you would receive an email to verify your account');
     }
 }

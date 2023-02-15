@@ -13,10 +13,14 @@ use Illuminate\Support\Facades\DB;
 
 class ExamRecordService
 {
+    /**
+     * @var ExamSlotService
+     */
     protected ExamSlotService $examSlotService;
-
     /**
      * Subject service class.
+     *
+     * @var SubjectService
      */
     protected SubjectService $subjectService;
 
@@ -27,8 +31,10 @@ class ExamRecordService
     }
 
     /**
-     * Get all exam records for all studentsin a class section for a semester.
+     * Get all exam records for all students in a class section for a semester.
      *
+     * @param int $section
+     * @param int $subject
      *
      * @return App\Modles\ExamRecord
      */
@@ -40,6 +46,7 @@ class ExamRecordService
     /**
      * Get all exam records in section.
      *
+     * @param int $section
      *
      * @return App\Models\ExamRecord
      */
@@ -51,6 +58,9 @@ class ExamRecordService
     /**
      * Get all exam records for a subject.
      *
+     * @param Exam $exam
+     * @param int  $user
+     * @param int  $subject
      *
      * @return App\Models\ExamRecord
      */
@@ -63,10 +73,12 @@ class ExamRecordService
     }
 
     /**
-     * Get all exam records for a user in a subject and a specofoc semester.
+     * Get all exam records for a user in a subject and an específic semester.
      *
-     * @param  int  $user
-     * @param  int  $subject
+     * @param Semester $semester
+     * @param int      $user
+     * @param int      $subject
+     *
      * @return App\Models\ExamRecord
      */
     public function getAllUserExamRecordInSemesterForSubject(Semester $semester, $user, $subject)
@@ -89,7 +101,9 @@ class ExamRecordService
     /**
      * Get all user exam records for user in an academic year.
      *
-     * @param  Semester  $semester
+     * @param Semester $semester
+     * @param int      $user
+     *
      * @return App\Models\ExamRecord
      */
     public function getAllUserExamRecordInAcademicYear(AcademicYear $academicYear, int $user)
@@ -105,6 +119,8 @@ class ExamRecordService
     /**
      * Get all user exam records for user in a semester.
      *
+     * @param Semester $semester
+     * @param int      $user
      *
      * @return App\Models\ExamRecord
      */
@@ -122,12 +138,13 @@ class ExamRecordService
     /**
      * Get all exam slots in exam.
      *
+     * @param $exams
      *
      * @return void
      */
     public function getAllExamSlotsInExams($exams)
     {
-        //create container variable for all exam slots in semster
+        //create container variable for all exam slots in semester
         $examSlots = [];
         //get all exam slots in exams
         foreach ($exams as $exam) {
@@ -143,7 +160,8 @@ class ExamRecordService
     /**
      * Create exam record.
      *
-     * @param  array|object  $records
+     * @param array|object $records
+     *
      * @return void
      */
     public function createExamRecord($records)
@@ -165,9 +183,9 @@ class ExamRecordService
                 // creates exam record or updates if records already exists
 
                 ExamRecord::updateOrCreate(
-                    ['user_id' => $records['user_id'],
-                        'section_id' => $records['section_id'],
-                        'subject_id' => $records['subject_id'],
+                    ['user_id'         => $records['user_id'],
+                        'section_id'   => $records['section_id'],
+                        'subject_id'   => $records['subject_id'],
                         'exam_slot_id' => $record['exam_slot_id'],
                     ],
                     [

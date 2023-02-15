@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StudentPromoteRequest;
 use App\Models\Promotion;
 use App\Services\Student\StudentService;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 
 class PromotionController extends Controller
 {
@@ -19,8 +17,10 @@ class PromotionController extends Controller
 
     /**
      * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function index(): View
+    public function index()
     {
         $this->authorize('viewAny', Promotion::class);
 
@@ -29,8 +29,10 @@ class PromotionController extends Controller
 
     /**
      * promote view.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function promoteView(): View
+    public function promoteView()
     {
         $this->authorize('promote', Promotion::class);
 
@@ -39,8 +41,12 @@ class PromotionController extends Controller
 
     /**
      * Promote student.
+     *
+     * @param StudentPromoteRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function promote(StudentPromoteRequest $request): RedirectResponse
+    public function promote(StudentPromoteRequest $request)
     {
         $this->authorize('promote', Promotion::class);
         $data = collect($request->except('_token'));
@@ -51,8 +57,12 @@ class PromotionController extends Controller
 
     /**
      * Reset promotion.
+     *
+     * @param Promotion $promotion
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function resetPromotion(Promotion $promotion): RedirectResponse
+    public function resetPromotion(Promotion $promotion)
     {
         $this->authorize('reset', Promotion::class);
         $this->student->resetPromotion($promotion);
@@ -63,10 +73,13 @@ class PromotionController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param Promotion $promotion
      *
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function show(Promotion $promotion): View
+    public function show(Promotion $promotion)
     {
         $this->authorize('view', $promotion);
 

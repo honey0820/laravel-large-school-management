@@ -9,7 +9,6 @@ use Spatie\Permission\Models\Role;
 class EditAccountApplicationForm extends Component
 {
     public User $applicant;
-
     public $roles;
 
     public function mount()

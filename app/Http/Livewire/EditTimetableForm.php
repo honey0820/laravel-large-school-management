@@ -9,9 +9,7 @@ use Livewire\Component;
 class EditTimetableForm extends Component
 {
     public Timetable $timetable;
-
     public $class;
-
     public $classes;
 
     public function mount(MyClassService $myClassService)

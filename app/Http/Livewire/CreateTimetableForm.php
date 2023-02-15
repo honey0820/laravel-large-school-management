@@ -8,7 +8,6 @@ use Livewire\Component;
 class CreateTimetableForm extends Component
 {
     public $class;
-
     public $classes;
 
     public function mount(MyClassService $myClassService)

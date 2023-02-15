@@ -10,19 +10,12 @@ use Livewire\Component;
 class AssignStudentsToParent extends Component
 {
     public User $parent;
-
     public $classes;
-
     public $class;
-
     public $sections;
-
     public $section;
-
     public $students;
-
     public $student;
-
     public $children;
 
     public function mount(SectionService $sectionService, MyClassService $myClassService)

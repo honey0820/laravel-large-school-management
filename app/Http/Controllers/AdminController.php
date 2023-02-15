@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Services\Admin\AdminService;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 class AdminController extends Controller
 {
@@ -19,28 +17,32 @@ class AdminController extends Controller
 
     /**
      * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function index(): View
+    public function index()
     {
-        $this->authorize('viewAny', [User::class, 'admin']);
-
         return view('pages.admin.index');
     }
 
     /**
      * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function create(): View
+    public function create()
     {
-        $this->authorize('create', [User::class, 'admin']);
-
         return view('pages.admin.create');
     }
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         $this->authorize('create', [User::class, 'admin']);
         $this->admin->createAdmin($request);
@@ -51,9 +53,13 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param User $admin
+     *
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function show(User $admin): View
+    public function show(User $admin)
     {
         $this->authorize('view', [$admin, 'admin']);
 
@@ -63,9 +69,13 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param User $admin
+     *
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function edit(User $admin): View
+    public function edit(User $admin)
     {
         $this->authorize('update', [$admin, 'admin']);
 
@@ -75,9 +85,14 @@ class AdminController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param \Illuminate\Http\Request $request
+     * @param User                     $admin
+     *
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $admin): RedirectResponse
+    public function update(Request $request, User $admin)
     {
         $this->authorize('update', [$admin, 'admin']);
         $this->admin->updateAdmin($admin, $request->except('_token', '_method'));
@@ -88,9 +103,13 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param User $admin
+     *
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(User $admin): RedirectResponse
+    public function destroy(User $admin)
     {
         $this->authorize('delete', [$admin, 'admin']);
         $this->admin->deleteAdmin($admin);

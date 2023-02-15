@@ -11,41 +11,26 @@ use Livewire\Component;
 class ResultChecker extends Component
 {
     public $section;
-
     public $sections;
-
     public $classes;
-
     public $class;
-
     public $students;
-
     public $student;
-
     public $academicYears;
-
     public $academicYear;
-
     public $semesters;
-
     public $semester;
-
     public $exams;
-
     public $examRecords;
-
     public $subjects;
-
     public $preparedResults;
-
     public $status;
-
     public $studentName;
 
     //rules
     public $rules = [
         'academicYear' => 'integer|exists:academic_years,id',
-        'semester' => 'required',
+        'semester'     => 'required',
     ];
 
     public function mount(MyClassService $myClassService)
@@ -122,7 +107,7 @@ class ResultChecker extends Component
         $semester = Semester::find($semester);
 
         // make sure user student isn't another role
-        if (! $student->hasRole('student')) {
+        if (!$student->hasRole('student')) {
             abort(404, 'Student not found.');
         }
         //set name that would be used in view

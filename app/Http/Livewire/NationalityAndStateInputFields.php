@@ -8,16 +8,13 @@ use Nnjeim\World\World;
 class NationalityAndStateInputFields extends Component
 {
     public $nationalities;
-
     public $nationality;
-
     public $states;
-
     public $state;
 
     protected $rules = [
         'nationality' => 'string',
-        'state' => 'string',
+        'state'       => 'string',
     ];
 
     public function mount()
@@ -25,7 +22,7 @@ class NationalityAndStateInputFields extends Component
         $this->nationalities = World::countries()->data->pluck('name');
 
         //set nationality to null if not found
-        if ($this->nationality != null && ! in_array($this->nationality, $this->nationalities->toArray())) {
+        if ($this->nationality != null && !in_array($this->nationality, $this->nationalities->toArray())) {
             $this->nationality = null;
         }
     }
@@ -34,7 +31,7 @@ class NationalityAndStateInputFields extends Component
     {
         // $this->states = collect(World::where('name.common' , $this->nationality)->first()->hydrateStates()->states->pluck('name'));
         $this->states = collect(World::countries([
-            'fields' => 'states',
+            'fields'  => 'states',
             'filters' => [
                 'name' => $this->nationality,
             ],
@@ -54,7 +51,7 @@ class NationalityAndStateInputFields extends Component
             $this->nationality = $this->nationalities->first();
         }
         $this->states = collect(World::countries([
-            'fields' => 'states',
+            'fields'  => 'states',
             'filters' => [
                 'name' => $this->nationality,
             ],

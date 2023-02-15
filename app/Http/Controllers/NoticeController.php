@@ -6,9 +6,6 @@ use App\Http\Requests\StoreNoticeRequest;
 use App\Http\Requests\UpdateNoticeRequest;
 use App\Models\Notice;
 use App\Services\Notice\NoticeService;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
-use Illuminate\View\View;
 
 class NoticeController extends Controller
 {
@@ -22,24 +19,32 @@ class NoticeController extends Controller
 
     /**
      * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function index(): View
+    public function index()
     {
         return view('pages.notice.index');
     }
 
     /**
      * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function create(): View
+    public function create()
     {
         return view('pages.notice.create');
     }
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @param \App\Http\Requests\StoreNoticeRequest $request
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function store(StoreNoticeRequest $request): RedirectResponse
+    public function store(StoreNoticeRequest $request)
     {
         $this->notice->storeNotice($request->except('_token'));
 
@@ -48,32 +53,49 @@ class NoticeController extends Controller
 
     /**
      * Display the specified resource.
+     *
+     * @param \App\Models\Notice $notice
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function show(Notice $notice): View
+    public function show(Notice $notice)
     {
         return view('pages.notice.show', compact('notice'));
     }
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * @param \App\Models\Notice $notice
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function edit(Notice $notice): Response
+    public function edit(Notice $notice)
     {
-        abort(404);
+        //
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param \App\Http\Requests\UpdateNoticeRequest $request
+     * @param \App\Models\Notice                     $notice
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function update(UpdateNoticeRequest $request, Notice $notice): Response
+    public function update(UpdateNoticeRequest $request, Notice $notice)
     {
-        abort(404);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param \App\Models\Notice $notice
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(Notice $notice): RedirectResponse
+    public function destroy(Notice $notice)
     {
         $this->notice->deleteNotice($notice);
 

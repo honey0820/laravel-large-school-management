@@ -5,26 +5,28 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AssignStudentRequest;
 use App\Models\User;
 use App\Services\Parent\ParentService;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 class ParentController extends Controller
 {
     /**
      * ParentService variable.
+     *
+     * @var \App\Services\Parent\ParentService
      */
-    public ParentService $parentService;
+    public ParentService $parent;
 
-    public function __construct(ParentService $parentService)
+    public function __construct(ParentService $parent)
     {
-        $this->parentService = $parentService;
+        $this->parent = $parent;
     }
 
     /**
      * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function index(): View
+    public function index()
     {
         $this->authorize('viewAny', [User::class, 'parent']);
 
@@ -33,8 +35,10 @@ class ParentController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function create(): View
+    public function create()
     {
         $this->authorize('create', [User::class, 'parent']);
 
@@ -43,11 +47,15 @@ class ParentController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         $this->authorize('create', [User::class, 'parent']);
-        $this->parentService->createParent($request);
+        $this->parent->createParent($request);
 
         return back()->with('success', 'Parent Created Successfully');
     }
@@ -55,13 +63,16 @@ class ParentController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param User $parent
      *
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function show(User $parent): View
+    public function show(User $parent)
     {
         $this->authorize('view', [$parent, 'parent']);
-        $this->parentService->user->verifyUserIsOfRoleElseNotFound($parent, 'parent');
+        $this->parent->user->verifyUserIsOfRoleElseNotFound($parent, 'parent');
 
         return view('pages.parent.show', compact('parent'));
     }
@@ -69,13 +80,16 @@ class ParentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param User $parent
      *
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function edit(User $parent): View
+    public function edit(User $parent)
     {
         $this->authorize('update', [$parent, 'parent']);
-        $this->parentService->user->verifyUserIsOfRoleElseNotFound($parent, 'parent');
+        $this->parent->user->verifyUserIsOfRoleElseNotFound($parent, 'parent');
 
         return view('pages.parent.edit', compact('parent'));
     }
@@ -83,14 +97,18 @@ class ParentController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param \Illuminate\Http\Request $request
+     * @param User                     $parent
      *
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $parent): RedirectResponse
+    public function update(Request $request, User $parent)
     {
         $this->authorize('update', [$parent, 'parent']);
-        $this->parentService->user->verifyUserIsOfRoleElseNotFound($parent, 'parent');
-        $this->parentService->updateParent($parent, $request->except('_token', '_method'));
+        $this->parent->user->verifyUserIsOfRoleElseNotFound($parent, 'parent');
+        $this->parent->updateParent($parent, $request->except('_token', '_method'));
 
         return back()->with('success', 'Parent Updated Successfully');
     }
@@ -98,41 +116,48 @@ class ParentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param User $parent
      *
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(User $parent): RedirectResponse
+    public function destroy(User $parent)
     {
         $this->authorize('delete', [$parent, 'parent']);
-        $this->parentService->user->verifyUserIsOfRoleElseNotFound($parent, 'parent');
-        $this->parentService->deleteParent($parent);
+        $this->parent->user->verifyUserIsOfRoleElseNotFound($parent, 'parent');
+        $this->parent->deleteParent($parent);
 
         return back()->with('success', 'Parent Deleted Successfully');
     }
 
     /**
      * View for assigning students to parent.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function assignStudentsView(User $parent)
     {
-        $this->authorize('update', [$parent, 'parent']);
-        $this->parentService->user->verifyUserIsOfRoleElseNotFound($parent, 'parent');
+        $this->parent->user->verifyUserIsOfRoleElseNotFound($parent, 'parent');
 
         return view('pages.parent.assign-students', compact('parent'));
     }
 
     /**
-     *  Assign or deassign student to parent.
+     * Undocumented function.
+     *
+     * @param AssignStudentRequest $request
+     * @param User                 $parent
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function assignStudent(AssignStudentRequest $request, User $parent): RedirectResponse
+    public function assignStudent(AssignStudentRequest $request, User $parent)
     {
-        $this->authorize('update', [$parent, 'parent']);
-
-        $this->parentService->user->verifyUserIsOfRoleElseNotFound($parent, 'parent');
+        $this->parent->user->verifyUserIsOfRoleElseNotFound($parent, 'parent');
         $student = $request->student_id;
         //set to true if null
         $request->assign == null ? $assign = true : $assign = $request->assign;
-        $this->parentService->assignStudentToParent($parent, $student, $assign);
+        $this->parent->assignStudentToParent($parent, $student, $assign);
 
         if ($assign == false) {
             $message = 'Student successfully removed from parent';

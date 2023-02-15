@@ -9,13 +9,9 @@ use Livewire\Component;
 class CreateStudentRecordFields extends Component
 {
     public $myClasses;
-
     public $myClass;
-
     public $sections;
-
     public $section;
-
     protected $myClassService;
 
     protected $rules = [

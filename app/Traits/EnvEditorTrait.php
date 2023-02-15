@@ -10,6 +10,7 @@ trait EnvEditorTrait
     /**
      * Write a new Env value to the env file the app is currently using.
      *
+     * @param array $values
      *
      * @return void
      */
@@ -26,7 +27,7 @@ trait EnvEditorTrait
                 $oldLine = substr($str, $keyPosition, $endOfLinePosition - $keyPosition);
 
                 // If environment variable does not exist, add it
-                if ($keyPosition === false || ! $endOfLinePosition || ! $oldLine) {
+                if ($keyPosition === false || !$endOfLinePosition || !$oldLine) {
                     $str .= "{$envKey}=\"{$envValue}\"\n";
                 } else {
                     //else replace it
@@ -36,7 +37,7 @@ trait EnvEditorTrait
         }
 
         $str = trim($str);
-        if (! file_put_contents($envFile, $str)) {
+        if (!file_put_contents($envFile, $str)) {
             return false;
         }
 
