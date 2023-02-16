@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\MyClass;
 use App\Models\Section;
 use App\Models\StudentRecord;
 use App\Models\User;
@@ -23,7 +24,7 @@ class StudentFactory extends Factory
     public function definition()
     {
         $student = User::factory()->create();
-        $section = Section::query()->inRandomOrder()->whereRelation('myClass.classGroup', 'school_id', 1)->first();
+        $section = Section::query()->inRandomOrder()->whereRelation('myClass.classGroup', 'school_id', 1 )->first();
         $class = $section->myClass;
         $student->assignRole('student');
 
