@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\FeeCategory;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class FeeCategorySeeder extends Seeder
