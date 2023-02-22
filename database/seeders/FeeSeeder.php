@@ -2,16 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\FeeCategory;
+use App\Models\Fee;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class FeeCategorySeeder extends Seeder
+class FeeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        FeeCategory::factory()->count(5)->create();
+        Fee::factory()->count(10)->create();
     }
 }
